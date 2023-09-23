@@ -13,7 +13,7 @@ const IndividualPostCard = (props) => {
       },
       body: JSON.stringify({ id: post._id })
     })
-
+ 
     const result = await response.json();
 
     if (result.success === true) {
