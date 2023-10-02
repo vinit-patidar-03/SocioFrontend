@@ -34,8 +34,9 @@ const SignIn = () => {
         <>
             <div className='w-full h-[calc(100vh-2.5rem)] flex justify-center items-center'>
                 <div className=' w-72 h-72 bg-slate-200 rounded-xl p-3 flex flex-col items-center'>
-                    <div className='p-3'>
-                        <img src="/images/InstagramText.png" className='w-24 m-auto' alt="logo" />
+                    <div className='p-3' style={{fontFamily:"Dancing Script",fontSize: "1.5rem",fontWeight:"bold"}}>
+                        {/* <img src="/images/InstagramText.png" className='w-24 m-auto' alt="logo" /> */}
+                        Sociogram
                     </div>
                     <div className='p-3'>
                         <form action="login" className='flex flex-col items-center'>
