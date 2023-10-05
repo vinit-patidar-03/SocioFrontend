@@ -30,6 +30,8 @@ const CreatedPostCard = (props) => {
 
   const likepostandUpdate = () => {
      likePost(post._id) 
+     let audio = new Audio('likesound.mp3');
+     audio.play();
     }
   // console.log(post.likes)
 
