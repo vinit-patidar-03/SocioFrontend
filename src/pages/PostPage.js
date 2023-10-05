@@ -5,7 +5,7 @@ const PostPage = () => {
     return (
         <>
             <div className='mx-auto mt-[75px]'>
-                <div className=' w-[100vw] h-[89vh] flex justify-center items-center'>
+                <div className='h-[88vh] w-[90%]  flex justify-center items-center m-auto'>
                     <PostCard />
                 </div>
             </div>
