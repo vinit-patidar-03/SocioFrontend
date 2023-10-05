@@ -26,8 +26,6 @@ const AppContext = (props) => {
         setUser(userDetails);
     }
 
-    console.log(user);
-
     const fetchPosts = async ()=>
     {
         const response = await fetch('https://socio-backend-seven.vercel.app/instagram/posts/posts',

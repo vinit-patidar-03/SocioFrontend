@@ -5,12 +5,10 @@ import Context from '../context/Context'
 
 const Home = () => {
     const Navigate = useNavigate('');
-    const { data, fetchPosts, fetchUserDetails} = useContext(Context);
+    const { data} = useContext(Context);
 
     useEffect(() => {
-        fetchPosts();
         userCheck();
-        fetchUserDetails();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
