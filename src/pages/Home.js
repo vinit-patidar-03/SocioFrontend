@@ -19,8 +19,6 @@ const Home = () => {
         }
     }
 
-    // console.log(data);
-
     return (
         <>{data &&
             <div className=' pt-24'>{

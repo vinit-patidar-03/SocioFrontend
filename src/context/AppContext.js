@@ -8,7 +8,9 @@ const AppContext = (props) => {
 
     useEffect(()=>
     {
-        fetchPosts();
+        setTimeout(()=>{
+            fetchPosts();
+        },1000)
        fetchUserDetails();
     },[])
 
