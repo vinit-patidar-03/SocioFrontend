@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
@@ -12,6 +13,7 @@ const SignUp = () => {
 
     const Submit = async (event) => {
         event.preventDefault();
+        toast.success('Account Created Successfully')
         const response = await fetch('https://socio-backend-seven.vercel.app/instagram/auth/signup', {
             method: "POST",
             headers: {
@@ -29,7 +31,7 @@ const SignUp = () => {
         <>
             <div className='w-full h-[calc(100vh-2.5rem)] flex justify-center items-center'>
                 <div className=' w-72 h-96 bg-slate-200 rounded-xl p-3 flex flex-col items-center'>
-                    <div className='p-3' style={{fontFamily:"Dancing Script",fontSize: "1.5rem",fontWeight:"bold"}}>
+                    <div className='p-3' style={{ fontFamily: "Dancing Script", fontSize: "1.5rem", fontWeight: "bold" }}>
                         {/* <img src="/images/InstagramText.png" className='w-24 m-auto' alt="logo" /> */}
                         Sociogram
                     </div>
@@ -62,7 +64,10 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
-
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </>
     )
 }

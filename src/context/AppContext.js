@@ -10,7 +10,7 @@ const AppContext = (props) => {
     {
         setTimeout(()=>{
             fetchPosts();
-        },1000)
+        },3000)
        fetchUserDetails();
     },[])
 

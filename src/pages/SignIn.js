@@ -1,51 +1,50 @@
 import React, { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
 
     const Navigate = useNavigate();
-    const [details,setDetails] = useState({email:'',password:''});
-    
-    const SubmitDetails = async (event)=>
-    {
+    const [details, setDetails] = useState({ email: '', password: '' });
+
+    const SubmitDetails = async (event) => {
         event.preventDefault();
-        const response = await fetch('https://socio-backend-seven.vercel.app/instagram/auth/login',{
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json"
+        toast.success('login successfully')
+        const response = await fetch('https://socio-backend-seven.vercel.app/instagram/auth/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            body : JSON.stringify({email: details.email, password: details.password})
+            body: JSON.stringify({ email: details.email, password: details.password })
         });
 
         const result = await response.json();
 
-        if(result.success)
-        {
-            localStorage.setItem('token1',result.authToken);
+        if (result.success) {
+            localStorage.setItem('token1', result.authToken);
             Navigate('/');
         }
     }
 
-    const fillDetails = (event)=>
-    {
-         setDetails({...details,[event.target.name]:event.target.value});
+    const fillDetails = (event) => {
+        setDetails({ ...details, [event.target.name]: event.target.value });
     }
     return (
         <>
             <div className='w-full h-[calc(100vh-2.5rem)] flex justify-center items-center'>
                 <div className=' w-72 h-72 bg-slate-200 rounded-xl p-3 flex flex-col items-center'>
-                    <div className='p-3' style={{fontFamily:"Dancing Script",fontSize: "1.5rem",fontWeight:"bold"}}>
+                    <div className='p-3' style={{ fontFamily: "Dancing Script", fontSize: "1.5rem", fontWeight: "bold" }}>
                         {/* <img src="/images/InstagramText.png" className='w-24 m-auto' alt="logo" /> */}
                         Sociogram
                     </div>
                     <div className='p-3'>
                         <form action="login" className='flex flex-col items-center'>
                             <div className='userInput relative'>
-                                <input type="email" className='my-2 py-1 px-2 text-sm bg-slate-200 outline-none border-b-2 border-black' id='email' name='email' autoComplete='email' required onChange={fillDetails}/>
+                                <input type="email" className='my-2 py-1 px-2 text-sm bg-slate-200 outline-none border-b-2 border-black' id='email' name='email' autoComplete='email' required onChange={fillDetails} />
                                 <label htmlFor="email" className='absolute left-0 py-2 text-slate-500'>username/email</label>
                             </div>
                             <div className='passInput relative'>
-                                <input type="password" className='my-2 py-1 px-2 text-sm bg-slate-200 outline-none border-b-2 border-black' id='password' name='password' autoComplete='new-password'  required onChange={fillDetails}/>
+                                <input type="password" className='my-2 py-1 px-2 text-sm bg-slate-200 outline-none border-b-2 border-black' id='password' name='password' autoComplete='new-password' required onChange={fillDetails} />
                                 <label htmlFor="password" className='absolute left-0 py-2 text-slate-500'>password</label>
                             </div>
 
@@ -58,6 +57,10 @@ const SignIn = () => {
                     </div>
                 </div>
             </div>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </>
     )
 }

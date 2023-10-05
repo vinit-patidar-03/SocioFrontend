@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Context from '../context/Context';
 
 const PostCard = () => {
 
@@ -9,11 +11,11 @@ const PostCard = () => {
     const [image, setImage] = useState('');
     const [text, setText] = useState('');
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState('');
+    const { user } = useContext(Context);
 
-    useEffect(() => {
-        fetchUserDetails();
-    }, [])
+    // useEffect(() => {
+    //     fetchUserDetails();
+    // }, [])
 
     const selectFile = (event) => {
         setPreview(URL.createObjectURL(event.target.files[0]));
@@ -21,49 +23,48 @@ const PostCard = () => {
     }
 
     const savePost = async () => {
-        if(image && text)
-        {
-        setLoading(true);
-        const data = new FormData();
-        data.append("file", image);
-        data.append("upload_preset", "hackerInsta");
-        data.append("cloud_name", "hacker03");
+        toast.success('Post Created Successfully');
+        if (image && text) {
+            setLoading(true);
+            const data = new FormData();
+            data.append("file", image);
+            data.append("upload_preset", "hackerInsta");
+            data.append("cloud_name", "hacker03");
 
-        const photoRes = await axios.post('https://api.cloudinary.com/v1_1/hacker03/image/upload', data);
+            const photoRes = await axios.post('https://api.cloudinary.com/v1_1/hacker03/image/upload', data);
 
-        const response = await fetch("https://socio-backend-seven.vercel.app/instagram/posts/createPosts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "authToken": localStorage.getItem('token1')
-            },
-            body: JSON.stringify({ description: text, photo: photoRes.data.url })
-        });
+            const response = await fetch("https://socio-backend-seven.vercel.app/instagram/posts/createPosts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authToken": localStorage.getItem('token1')
+                },
+                body: JSON.stringify({ description: text, photo: photoRes.data.url })
+            });
 
-        const result = await response.json()
-        if (result.success) {
-            setLoading(false);
-            Navigate('/');
+            const result = await response.json()
+            if (result.success) {
+                setLoading(false);
+                Navigate('/');
+            }
+        }
+        else {
+            alert("Please select something to post...");
         }
     }
-    else
-    {
-        alert("Please select something to post...");
-    }
-    }
 
-    const fetchUserDetails = async () => {
-        const response = await fetch('https://socio-backend-seven.vercel.app/instagram/auth/getUser', {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "authToken": localStorage.getItem('token1')
-            }
-        })
+    // const fetchUserDetails = async () => {
+    //     const response = await fetch('https://socio-backend-seven.vercel.app/instagram/auth/getUser', {
+    //         method: "GET",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "authToken": localStorage.getItem('token1')
+    //         }
+    //     })
 
-        const userDetails = await response.json();
-        setUser(userDetails);
-    }
+    //     const userDetails = await response.json();
+    //     setUser(userDetails);
+    // }
     return (
         <>
             {
@@ -89,6 +90,10 @@ const PostCard = () => {
                         </div>
                     </div>
             }
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </>
     )
 }
