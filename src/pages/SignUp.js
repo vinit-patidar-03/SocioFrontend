@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 const SignUp = () => {
 
     const Navigate = useNavigate();
+    const [status,setStatus] = useState(false)
     const [credentials, setCredentials] = useState({ name: '', email: '', password: '', confirm_password: '' });
     const { showAlert } = useContext(Context);
     const userDetails = (event) => {
@@ -13,6 +14,7 @@ const SignUp = () => {
 
     const Submit = async (event) => {
         event.preventDefault();
+        setStatus(true);
         const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/auth/signup', {
             method: "POST",
             headers: {
@@ -57,7 +59,7 @@ const SignUp = () => {
                                 <label htmlFor="confirm_password" className='absolute left-2 top-2 py-2 text-xs text-slate-400 cursor-text'>confirm password</label>
                             </div>
 
-                            <button className='px-5 py-1 w-full bg-red-600 hover:bg-red-500 text-white font-bold mt-5 rounded-xl transition-all' onClick={Submit}>signup</button>
+                            <button className='px-5 py-1 w-full bg-red-600 hover:bg-red-500 text-white font-bold mt-5 rounded-xl transition-all' onClick={Submit} disabled={status}>signup</button>
                         </form>
                     </div>
                     <div className='flex items-center px-3'>
