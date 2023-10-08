@@ -5,61 +5,49 @@
 
 /* Animation and styling for buttons */
 .btn {
-  background: linear-gradient(to right,red,orange);
+  background: linear-gradient(to right, red, orange);
   background-clip: text;
   color: transparent;
 }
 
-.userInput label
-{
+.userInput label {
   transition: all 1s ease;
 }
 
-.passInput label
-{
+.passInput label {
   transition: all 1s ease;
 }
 
-.userInput input:focus ~ label,
-.userInput input:valid ~ label
-{
-    top: -10px;
-    /* bottom: 15px; */
-    left: 0;
-    background: linear-gradient(to right,red,orange);
-    background-clip: text;
-    color: transparent;
-    font-size: 10px;
-    /* transition: all 0.5s ease-in; */
+.userInput input:focus~label,
+.passInput input:focus~label {
+  top: -15px;
+  left: 0;
+  color: white;
+  font-size: 10px;
+  /* transition: all 0.5s ease-in; */
 }
 
-.passInput input:focus ~ label,
-.passInput input:valid ~ label
-{
-    top: -10px;
-    /* bottom: 15px; */
-    left: 0;
-    background: linear-gradient(to right,red,orange);
-    background-clip: text;
-    color: transparent;
-    font-size: 10px;
-    /* transition: all 0.5s ease-in; */
+.userInput input:valid~label,
+.passInput input:valid~label {
+  top: -15px;
+  font-size: 10px;
+  left: 0;
+  color: white;
+  /* transition: all 0.5s ease-in; */
 }
 
-.createdPostCard
-{
+.createdPostCard {
   box-shadow: 0px 0px 5px gray;
 }
 
 @media (max-width : 645px) {
-  .createdPostCard{
+  .createdPostCard {
     width: 100%;
     box-shadow: 0px 2px 2px gray;
     border-radius: 0px;
   }
 
-  .createPostCard
-  {
+  .createPostCard {
     width: 100vw;
   }
 }

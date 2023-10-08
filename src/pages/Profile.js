@@ -13,7 +13,7 @@ const Profile = () => {
     }, [])
 
     const fetchIndividualPosts = async (event) => {
-        const response = await fetch('https://socio-backend-seven.vercel.app/instagram/posts/individualPosts', {
+        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/individualPosts', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

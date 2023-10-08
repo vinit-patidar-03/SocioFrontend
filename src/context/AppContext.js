@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 import Context from './Context'
 
 const AppContext = (props) => {
 
     const [user, setUser] = useState();
-    const [data,setData] = useState();
+    const [data, setData] = useState();
+    const [message,setMessage] = useState('');
 
-    useEffect(()=>
-    {
-        setTimeout(()=>{
+    useEffect(() => {
+        setTimeout(() => {
             fetchPosts();
-        },3000)
-       fetchUserDetails();
-    },[])
+            fetchUserDetails();
+        }, 3000)
+    }, [])
 
-    const fetchUserDetails = async ()=>
-    {
-        const response = await fetch('https://socio-backend-seven.vercel.app/instagram/auth/getUser',{
+    const showAlert = (status, message) => {
+        if (status === "success") {
+            toast.success(message);
+        }
+        else if(status === "danger")
+        {
+            toast.error(message);
+        }
+    }
+
+    const fetchUserDetails = async () => {
+        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/auth/getUser', {
             method: "GET",
-            headers:{
-                "Content-Type" : "application/json",
-                "authToken" : localStorage.getItem('token1')
+            headers: {
+                "Content-Type": "application/json",
+                "authToken": localStorage.getItem('token1')
             }
         })
 
@@ -28,22 +38,21 @@ const AppContext = (props) => {
         setUser(userDetails);
     }
 
-    const fetchPosts = async ()=>
-    {
-        const response = await fetch('https://socio-backend-seven.vercel.app/instagram/posts/posts',
-        {
-            method : "GET",
-            headers : {
-                "Content-Type" : "application/json"
-            }
-        });
+    const fetchPosts = async () => {
+        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/posts',
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
 
         const result = await response.json();
         setData(result.reverse());
     }
 
     return (
-        <Context.Provider value = {{user,setUser,data,setData, fetchPosts, fetchUserDetails}}>
+        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert,message,setMessage}}>
             {props.children}
         </Context.Provider>
     )

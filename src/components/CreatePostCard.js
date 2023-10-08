@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
@@ -11,7 +10,8 @@ const PostCard = () => {
     const [image, setImage] = useState('');
     const [text, setText] = useState('');
     const [loading, setLoading] = useState(false);
-    const { user } = useContext(Context);
+    const [message,setMessage] = useState('');
+    const { user ,showAlert} = useContext(Context);
 
     // useEffect(() => {
     //     fetchUserDetails();
@@ -23,7 +23,6 @@ const PostCard = () => {
     }
 
     const savePost = async () => {
-        toast.success('Post Created Successfully');
         if (image && text) {
             setLoading(true);
             const data = new FormData();
@@ -33,7 +32,7 @@ const PostCard = () => {
 
             const photoRes = await axios.post('https://api.cloudinary.com/v1_1/hacker03/image/upload', data);
 
-            const response = await fetch("https://socio-backend-seven.vercel.app/instagram/posts/createPosts", {
+            const response = await fetch("https://sociogrambackendapi.vercel.app/instagram/posts/createPosts", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,25 +45,17 @@ const PostCard = () => {
             if (result.success) {
                 setLoading(false);
                 Navigate('/');
+                showAlert("success","post created successfully")
+            }
+            else{
+                showAlert("danger","some error occured");
             }
         }
         else {
-            alert("Please select something to post...");
+            setMessage("Please fill up all the fields !!!")
         }
     }
 
-    // const fetchUserDetails = async () => {
-    //     const response = await fetch('https://socio-backend-seven.vercel.app/instagram/auth/getUser', {
-    //         method: "GET",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "authToken": localStorage.getItem('token1')
-    //         }
-    //     })
-
-    //     const userDetails = await response.json();
-    //     setUser(userDetails);
-    // }
     return (
         <>
             {
@@ -87,13 +78,10 @@ const PostCard = () => {
                                 <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-full' placeholder='write something about your post...' onChange={(event) => { setText(event.target.value) }}></textarea>
                                 <button className='py-1 ml-2 px-5 rounded-full bg-[#ff8f00] transition-all border-4 border-white hover:bg-orange-500 hover:transition-all' onClick={savePost}><i className="fa-solid fa-arrow-right fa-xl"></i></button>
                             </div>
+                            <p className=' text-white'>{message}</p>
                         </div>
                     </div>
             }
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
         </>
     )
 }

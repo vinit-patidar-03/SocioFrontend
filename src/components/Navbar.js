@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import Context from '../context/Context';
 
 const Navbar = () => {
+  const {setMessage} = useContext(Context);
   const location = useLocation();
 
   useEffect(()=>
@@ -9,10 +11,9 @@ const Navbar = () => {
 
   },[location])
 
-  const logOut = ()=>
+  const alertLogout = ()=>
   {
-     alert("Would you like to sign out?")
-     localStorage.removeItem('token');
+     setMessage("Logout");
   }
   return (
     <>
@@ -25,7 +26,7 @@ const Navbar = () => {
                 <Link to='/' className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/login' || location.pathname === '/signup'?'hidden':''}`}><i className="fa-solid fa-house fa-lg"></i></Link>
                 <Link to='/profile' className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/login' || location.pathname === '/signup'?'hidden':''}`}><i className="fa-solid fa-user fa-lg"></i></Link>
                 <Link to='/post' className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/login' || location.pathname === '/signup'?'hidden':''}`}><i className="fa-solid fa-square-plus fa-lg"></i></Link>
-                <Link to='/login' className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/login' || location.pathname === '/signup'?'hidden':''}`} onClick={logOut}><i className="fa-solid fa-right-from-bracket fa-lg"></i></Link>
+                <Link className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/login' || location.pathname === '/signup'?'hidden':''}`} onClick={alertLogout}><i className="fa-solid fa-right-from-bracket fa-lg"></i></Link>
                 <Link to='/login' className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/' || location.pathname === '/post' || location.pathname === '/profile'?'hidden':''}`}>Login</Link>
                 <Link to='/signup' className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/' || location.pathname === '/post' || location.pathname === '/profile'?'hidden':''}`}>SignUp</Link>
                 </li>

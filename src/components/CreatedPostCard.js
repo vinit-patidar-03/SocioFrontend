@@ -15,7 +15,7 @@ const CreatedPostCard = (props) => {
 
 
   const likePost = async (id) => {
-    const response = await fetch('https://socio-backend-seven.vercel.app/instagram/posts/like', {
+    const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/like', {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
