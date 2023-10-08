@@ -49,7 +49,7 @@ const SignIn = () => {
                                 <input type="password" className='my-2 py-1 px-2 text-black text-sm outline-none z-10' id='password' name='password' autoComplete='new-password' required onChange={fillDetails}/>
                                 <label htmlFor="password" className='absolute left-2 top-2 py-2 text-xs text-slate-400 cursor-text'>Password</label>
                             </div>
-                            <button className='px-5 w-full bg-red-600 hover:bg-red-500 text-white font-bold mt-5 rounded-xl transition-all' onClick={SubmitDetails}>Login</button>
+                            <button className='px-5 py-1 w-full bg-red-600 hover:bg-red-500 text-white font-bold mt-5 rounded-xl transition-all' onClick={SubmitDetails}>Login</button>
                         </form>
                     </div>
                     <div className='flex items-center px-3'>
