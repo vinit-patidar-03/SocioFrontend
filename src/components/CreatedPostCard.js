@@ -24,7 +24,6 @@ const CreatedPostCard = (props) => {
       body: JSON.stringify({ postId: id })
     })
     const result = await response.json();
-    console.log(result);
     setLikestatus(result.success);
   }
 

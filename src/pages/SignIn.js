@@ -19,7 +19,6 @@ const SignIn = () => {
         });
 
         const result = await response.json();
-       console.log(result);
         if (result.success) {
             localStorage.setItem('token1', result.authToken);
             Navigate('/');
