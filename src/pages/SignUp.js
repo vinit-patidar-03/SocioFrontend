@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Context from '../context/Context';
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 const SignUp = () => {
 
@@ -15,16 +16,14 @@ const SignUp = () => {
     const Submit = async (event) => {
         event.preventDefault();
         setStatus(true);
-        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/auth/signup', {
-            method: "POST",
+        const response = await axios.post('https://sociogrambackendapi.vercel.app/instagram/auth/signup',JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, confirm_password: credentials.confirm_password }), {
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, confirm_password: credentials.confirm_password })
+            }
         });
-        const data = await response.json();
-        if (data.success) {
-            localStorage.setItem('token1', data.authToken);
+
+        if (response.data.success) {
+            localStorage.setItem('token1', response.data.authToken);
             Navigate('/');
             showAlert("success","account created successfully");
         }

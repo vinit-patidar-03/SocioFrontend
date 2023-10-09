@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Context from '../context/Context';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Warning = (props) => {
     const Navigate = useNavigate('');
@@ -15,16 +16,13 @@ const Warning = (props) => {
     }
 
     const deletePost = async () => {
-        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/deletePost', {
-            method: 'DELETE',
+        const response = await axios.delete('https://sociogrambackendapi.vercel.app/instagram/posts/deletePost',JSON.stringify({ id: message }), {
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id: message })
+            }
         })
-        const result = await response.json();
 
-        if (result.success === true) {
+        if (response.data.success === true) {
             Navigate('/');
             showAlert("success", "post deleted successfully");
         }

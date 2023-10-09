@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import Context from './Context'
+import axios from 'axios';
 
 const AppContext = (props) => {
 
@@ -26,30 +27,26 @@ const AppContext = (props) => {
 
     const fetchUserDetails = async () => {
         if (localStorage.getItem("token1") !== null) {
-            const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/auth/getUser', {
-                method: "GET",
+            const response = await axios.get('https://sociogrambackendapi.vercel.app/instagram/auth/getUser', {
                 headers: {
                     "Content-Type": "application/json",
                     "authToken": localStorage.getItem('token1')
                 }
             })
-            const userDetails = await response.json();
-            setUser(userDetails);
+
+            setUser(response.data);
         }
     }
 
     const fetchPosts = async () => {
         if (localStorage.getItem('token1')) {
-            const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/posts',
+            const response = await axios.get('https://sociogrambackendapi.vercel.app/instagram/posts/posts',
                 {
-                    method: "GET",
                     headers: {
                         "Content-Type": "application/json"
                     }
                 });
-
-            const result = await response.json();
-            setData(result.reverse());
+            setData(response.data.reverse());
         }
     }
 

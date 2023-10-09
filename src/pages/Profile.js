@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import UserProfileCard from '../components/UserProfileCard';
 import IndividualPostCard from '../components/IndividualPostCard';
 import Context from '../context/Context';
+import axios from 'axios';
 
 const Profile = () => {
 
@@ -13,16 +14,14 @@ const Profile = () => {
     }, [])
 
     const fetchIndividualPosts = async (event) => {
-        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/individualPosts', {
-            method: "GET",
+        const response = await axios.get('https://sociogrambackendapi.vercel.app/instagram/posts/individualPosts', {
             headers: {
                 "Content-Type": "application/json",
                 "authToken": localStorage.getItem('token1')
             }
         })
 
-        const result = await response.json();
-        setIndividualPosts(result);
+        setIndividualPosts(response.data);
     }
 
     return (

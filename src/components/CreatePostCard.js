@@ -13,9 +13,6 @@ const PostCard = () => {
     const [message,setMessage] = useState('');
     const { user ,showAlert} = useContext(Context);
 
-    // useEffect(() => {
-    //     fetchUserDetails();
-    // }, [])
 
     const selectFile = (event) => {
         setPreview(URL.createObjectURL(event.target.files[0]));
@@ -31,18 +28,15 @@ const PostCard = () => {
             data.append("cloud_name", "hacker03");
 
             const photoRes = await axios.post('https://api.cloudinary.com/v1_1/hacker03/image/upload', data);
-
-            const response = await fetch("https://sociogrambackendapi.vercel.app/instagram/posts/createPosts", {
-                method: "POST",
+            
+            const response = await axios.post("https://sociogrambackendapi.vercel.app/instagram/posts/createPosts", JSON.stringify({ description: text, photo: photoRes.data.url }), {
                 headers: {
                     "Content-Type": "application/json",
                     "authToken": localStorage.getItem('token1')
-                },
-                body: JSON.stringify({ description: text, photo: photoRes.data.url })
+                }
             });
-
-            const result = await response.json()
-            if (result.success) {
+            
+            if (response.data.success) {
                 setLoading(false);
                 Navigate('/');
                 showAlert("success","post created successfully")

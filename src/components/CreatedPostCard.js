@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../context/Context';
+import axios from 'axios';
 
 const CreatedPostCard = (props) => {
 
@@ -15,16 +16,14 @@ const CreatedPostCard = (props) => {
 
 
   const likePost = async (id) => {
-    const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/like', {
-      method: "PUT",
+    const response = await axios.put('https://sociogrambackendapi.vercel.app/instagram/posts/like',  JSON.stringify({ postId: id }),{
       headers: {
         "Content-Type": "application/json",
         "authToken": localStorage.getItem('token1'),
-      },
-      body: JSON.stringify({ postId: id })
+      }
     })
-    const result = await response.json();
-    setLikestatus(result.success);
+
+    setLikestatus(response.data.success);
   }
 
   const likepostandUpdate = () => {

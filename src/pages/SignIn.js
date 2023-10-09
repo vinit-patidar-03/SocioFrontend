@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Context from '../context/Context';
+import axios from 'axios';
 
 const SignIn = () => {
 
@@ -12,17 +13,14 @@ const SignIn = () => {
     const SubmitDetails = async (event) => {
         event.preventDefault();
         setStatus(true);
-        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/auth/login', {
-            method: "POST",
+        const response = await axios.post('https://sociogrambackendapi.vercel.app/instagram/auth/login',JSON.stringify({ email: details.email, password: details.password }), {
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email: details.email, password: details.password })
+            }
         });
 
-        const result = await response.json();
-        if (result.success) {
-            localStorage.setItem('token1', result.authToken);
+        if (response.data.success) {
+            localStorage.setItem('token1', response.data.authToken);
             Navigate('/');
             showAlert("success","login successfully");
         }
