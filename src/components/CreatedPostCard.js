@@ -35,7 +35,7 @@ const CreatedPostCard = (props) => {
 
   return (
     <>{user &&
-      <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[50%] createdPostCard'>
+      <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[40%] createdPostCard'>
         <div className='m-2 flex items-center'>
           <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" className='w-8' alt="logo" />
           <h5 className='ml-2'>{post.name}</h5>
