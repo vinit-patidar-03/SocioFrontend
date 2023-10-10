@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import Context from '../context/Context';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const Warning = (props) => {
     const Navigate = useNavigate('');
@@ -16,13 +15,16 @@ const Warning = (props) => {
     }
 
     const deletePost = async () => {
-        const response = await axios.delete('https://sociogrambackendapi.vercel.app/instagram/posts/deletePost',JSON.stringify({ id: message }), {
+
+        const response = await fetch('https://sociogrambackendapi.vercel.app/instagram/posts/deletePost', {
+            method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({ id: message })
         })
-
-        if (response.data.success === true) {
+        const result = await response.json();
+        if (result.success === true) {
             Navigate('/');
             showAlert("success", "post deleted successfully");
         }
@@ -37,7 +39,7 @@ const Warning = (props) => {
                 <div className='absolute p-10 w-72 bg-[#ff532b] text-white rounded-xl'>
                     <h4 className='text-center'>do you want to {message === "Logout" ? message : "Delete"}?</h4>
                     <div className='flex justify-evenly my-5'>
-                        <button className='px-5 py-1 bg-gray-600 rounded-full hover:bg-gray-500 transition-all' onClick={()=>{Navigate('/'); setMessage('')}}>Cancel</button>
+                        <button className='px-5 py-1 bg-gray-600 rounded-full hover:bg-gray-500 transition-all' onClick={() => { Navigate('/'); setMessage('') }}>Cancel</button>
                         <button className='px-5 py-1 bg-red-700 hover:bg-red-600 transition-all rounded-full' onClick={message === "Logout" ? LogOut : deletePost}>{message === "Logout" ? message : "Delete"}</button>
                     </div>
                 </div>
