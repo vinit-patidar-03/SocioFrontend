@@ -15,7 +15,7 @@ const UploadProfilephoto = () => {
     const savePost = async () => {
 
         if (avatar || text) {
-            const response = await axios.put("http://localhost:5000/sociogram/auth/editProfile", JSON.stringify({ bio: text, avatar: avatar }), {
+            const response = await axios.put("https://sociogrambackendapi.vercel.app/sociogram/auth/editProfile", JSON.stringify({ bio: text, avatar: avatar }), {
                 headers: {
                     "Content-Type": "application/json",
                     "authToken": localStorage.getItem('token1')

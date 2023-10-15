@@ -10,7 +10,7 @@ const CommentCard = (props) => {
     },[])
 
     const fetchCommentedUser = async () =>{
-        const response = await axios.get(`http://localhost:5000/sociogram/auth/getUser/${comment.postedby}`)
+        const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/auth/getUser/${comment.postedby}`)
         setDetails(response.data);
     }
   return (

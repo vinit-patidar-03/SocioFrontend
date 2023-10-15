@@ -13,7 +13,7 @@ const SignIn = () => {
     const SubmitDetails = async (event) => {
         event.preventDefault();
         setStatus(true);
-        const response = await axios.post('http://localhost:5000/sociogram/auth/login',JSON.stringify({ email: details.email, password: details.password }), {
+        const response = await axios.post('https://sociogrambackendapi.vercel.app/sociogram/auth/login',JSON.stringify({ email: details.email, password: details.password }), {
             headers: {
                 "Content-Type": "application/json"
             }

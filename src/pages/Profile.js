@@ -14,7 +14,7 @@ const Profile = () => {
     }, [])
 
     const fetchIndividualPosts = async (event) => {
-        const response = await axios.get('http://localhost:5000/sociogram/posts/individualPosts', {
+        const response = await axios.get('https://sociogrambackendapi.vercel.app/sociogram/posts/individualPosts', {
             headers: {
                 "Content-Type": "application/json",
                 "authToken": localStorage.getItem('token1')

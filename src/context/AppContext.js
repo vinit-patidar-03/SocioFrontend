@@ -35,7 +35,7 @@ const AppContext = (props) => {
 
     const fetchUserDetails = async () => {
         if (localStorage.getItem("token1") !== null) {
-            const response = await axios.get('http://localhost:5000/sociogram/auth/getUser', {
+            const response = await axios.get('https://sociogrambackendapi.vercel.app/sociogram/auth/getUser', {
                 headers: {
                     "Content-Type": "application/json",
                     "authToken": localStorage.getItem('token1')
@@ -49,7 +49,7 @@ const AppContext = (props) => {
 
     const fetchPosts = async () => {
         if (localStorage.getItem('token1')) {
-            const response = await axios.get('http://localhost:5000/sociogram/posts/posts',
+            const response = await axios.get('https://sociogrambackendapi.vercel.app/sociogram/posts/posts',
                 {
                     headers: {
                         "Content-Type": "application/json"
@@ -60,7 +60,7 @@ const AppContext = (props) => {
     }
 
     const fetchPost = async (id) => {
-        const response = await axios.get(`http://localhost:5000/sociogram/posts/post/${id}`, {
+        const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/post/${id}`, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -70,7 +70,7 @@ const AppContext = (props) => {
     }
 
     const likePost = async (id) => {
-        const response = await axios.put('http://localhost:5000/sociogram/posts/like',  JSON.stringify({ postId: id }),{
+        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/like',  JSON.stringify({ postId: id }),{
           headers: {
             "Content-Type": "application/json",
             "authToken": localStorage.getItem('token1'),
@@ -86,7 +86,7 @@ const AppContext = (props) => {
         }
 
     const commentonPost = async (comment,id) =>{
-        const response = await axios.put('http://localhost:5000/sociogram/posts/comment',JSON.stringify({postId: id,comment}),{headers: {"Content-Type": "application/json","authToken": localStorage.getItem('token1')}});
+        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment',JSON.stringify({postId: id,comment}),{headers: {"Content-Type": "application/json","authToken": localStorage.getItem('token1')}});
         console.log(response);
         setLikestatus(response.data.success)
     }
