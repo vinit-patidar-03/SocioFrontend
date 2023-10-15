@@ -30,7 +30,7 @@ const PostCard = () => {
 
             const photoRes = await axios.post('https://api.cloudinary.com/v1_1/hacker03/image/upload', data);
 
-            const response = await axios.post("https://sociogrambackendapi.vercel.app/sociogram/posts/createPosts", JSON.stringify({ description: text, photo: photoRes.data.url }), {
+            const response = await axios.post("https://sociogrambackendapi.vercel.app/sociogram/posts/createPosts", JSON.stringify({ description: text, photo: photoRes.data.url, avatar: user.avatar}), {
                 headers: {
                     "Content-Type": "application/json",
                     "authToken": localStorage.getItem('token1')

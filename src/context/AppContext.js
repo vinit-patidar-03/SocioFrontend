@@ -16,7 +16,7 @@ const AppContext = (props) => {
         setTimeout(()=>{
             fetchPosts();
             fetchUserDetails();
-        },3000)
+        },1000)
     }, [update])
 
     const playSound = ()=>{

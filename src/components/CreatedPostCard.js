@@ -18,7 +18,7 @@ const CreatedPostCard = (props) => {
 
 
   return (
-    <>{post &&
+    <>{user && 
       <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[60%] createdPostCard'>
         <div className='m-2 flex items-center'>
         <img src={Avatars[post.avatar]} className='w-10 rounded-full' alt="logo" />
