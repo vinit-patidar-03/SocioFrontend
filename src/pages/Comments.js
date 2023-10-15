@@ -27,7 +27,7 @@ const Comments = () => {
                      {
                         post&&
                         post.comments.map((elem,index)=>{
-                           return <CommentCard comment = {elem} key={index} />
+                           return <CommentCard comment = {elem} post={post} key={index} />
                         })
                      }
                 </div>
