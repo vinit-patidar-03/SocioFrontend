@@ -9,7 +9,7 @@ const CreatedPostCard = (props) => {
   const Navigate = useNavigate('')
   const [comment,setComment] = useState('');
   const { post } = props;
-  const { user, fetchPosts, likestatus, likepostandUpdate,commentonPostandUpdate } = useContext(Context);
+  const { user,fetchPosts, likestatus, likepostandUpdate,commentonPostandUpdate } = useContext(Context);
 
 
   useEffect(() => {
@@ -18,10 +18,10 @@ const CreatedPostCard = (props) => {
 
 
   return (
-    <>{user &&
-      <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[40%] createdPostCard'>
+    <>{post &&
+      <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[60%] createdPostCard'>
         <div className='m-2 flex items-center'>
-        <img src={Avatars[user.avatar]} className='w-10 rounded-full' alt="logo" />
+        <img src={Avatars[post.avatar]} className='w-10 rounded-full' alt="logo" />
           <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate('/profile') }}>{post.name}</h5>
         </div>
         <div className='m-auto p-2'>

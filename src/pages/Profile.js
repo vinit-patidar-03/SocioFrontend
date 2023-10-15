@@ -7,10 +7,11 @@ import axios from 'axios';
 const Profile = () => {
 
     const [individualPosts, setIndividualPosts] = useState('');
-    const { user } = useContext(Context);
+    const { user,fetchUserDetails } = useContext(Context);
 
     useEffect(() => {
         fetchIndividualPosts();
+        fetchUserDetails();
     }, [])
 
     const fetchIndividualPosts = async (event) => {
