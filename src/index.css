@@ -47,7 +47,7 @@
     border-radius: 0px;
   }
 
-  .createPostCard {
+  .createPostCard,.commentCard {
     width: 100vw;
   }
 }
