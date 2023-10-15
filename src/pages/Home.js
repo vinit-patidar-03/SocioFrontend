@@ -21,7 +21,7 @@ const Home = () => {
 
     return (
         <>{data &&
-            <div className=' mt-[100px]'>{
+            <div className=' mt-[80px]'>{
                 data.map((elem, index) => {
                     return <CreatedPostCard post={elem} key={index} />
                 })

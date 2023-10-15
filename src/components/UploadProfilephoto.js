@@ -21,7 +21,13 @@ const UploadProfilephoto = () => {
                     "authToken": localStorage.getItem('token1')
                 }
             });
-
+             
+            await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/avatarUpdate',JSON.stringify({avatar: avatar}),{
+                headers:{
+                    "Content-Type": "application/json",
+                    "authToken" : localStorage.getItem('token1')
+                }
+            })
 
             if (response.data.success) {
                 setLoading(false);
