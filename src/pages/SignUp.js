@@ -16,7 +16,7 @@ const SignUp = () => {
     const Submit = async (event) => {
         event.preventDefault();
         setStatus(true);
-        const response = await axios.post('https://sociogrambackendapi.vercel.app/instagram/auth/signup', JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, confirm_password: credentials.confirm_password }), {
+        const response = await axios.post('http://localhost:5000/sociogram/auth/signup', JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, confirm_password: credentials.confirm_password }), {
             headers: {
                 "Content-Type": "application/json"
             }

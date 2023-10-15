@@ -1,51 +1,48 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react'
+import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreatedPostCard = (props) => {
 
+  const Navigate = useNavigate('')
+  const [comment,setComment] = useState('');
   const { post } = props;
-  const {user,fetchPosts} = useContext(Context);
-  const [likestatus,setLikestatus] = useState();
-
-  useEffect(()=>
-  {
-      fetchPosts();
-  },[likestatus])
+  const { user, fetchPosts, likestatus, likepostandUpdate,commentonPostandUpdate } = useContext(Context);
 
 
-  const likePost = async (id) => {
-    const response = await axios.put('https://sociogrambackendapi.vercel.app/instagram/posts/like',  JSON.stringify({ postId: id }),{
-      headers: {
-        "Content-Type": "application/json",
-        "authToken": localStorage.getItem('token1'),
-      }
-    })
+  useEffect(() => {
+    fetchPosts();
+  }, [likestatus])
 
-    setLikestatus(response.data.success);
-  }
-
-  const likepostandUpdate = () => {
-     likePost(post._id) 
-     let audio = new Audio('likesound.mp3');
-     audio.play();
-    }
-  // console.log(post.likes)
 
   return (
     <>{user &&
       <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[40%] createdPostCard'>
         <div className='m-2 flex items-center'>
-          <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" className='w-8' alt="logo" />
-          <h5 className='ml-2'>{post.name}</h5>
+        <img src={Avatars[user.avatar]} className='w-10 rounded-full' alt="logo" />
+          <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate('/profile') }}>{post.name}</h5>
         </div>
         <div className='m-auto p-2'>
           <img src={post.photo} className='m-auto object-contain w-[90%]' alt="logo" />
         </div>
-        <i className={`fa-${post.likes.filter((elem)=>{return elem === user._id}).length !== 0?"solid":"regular"} fa-heart ml-2 cursor-pointer fa-lg ${post.likes.filter((elem)=>{return elem === user._id}).length !== 0?"text-pink-500":""}`} onClick={likepostandUpdate} title='like/dislike'></i>
-        <p className='ml-2'>{post.likes.length} likes</p>
-        <p className='p-2'>{post.description}</p>
+        <div className='flex'>
+          <div>
+            <i className={`fa-${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "solid" : "regular"} fa-heart ml-2 cursor-pointer fa-lg ${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "text-pink-500" : ""}`} onClick={() => { likepostandUpdate(post._id) }} title='like/dislike'></i>
+            <p className='ml-2'>{post.likes.length} likes</p>
+          </div>
+          <div className='ml-5' onClick={() => { Navigate(`/comments/${post._id}`) }}>
+            <i className="fa-regular fa-comment fa-lg ml-2 cursor-pointer" title='comment'></i>
+            <p className='ml-2'>{post.comments.length} comments</p>
+          </div>
+ 
+        </div>
+        <p className='m-2'>{post.description}</p>
+        <div className='ml-2'>
+          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[75%]' value={comment}/>
+          <button className='px-4 py-1 text-white bg-[#ff3f00] rounded-full ml-2 hover:bg-orange-600 transition-all hover:transition-all' onClick={()=>{commentonPostandUpdate(post._id,comment); setComment('')}}>Post</button>
+        </div>
       </div>
     }
     </>

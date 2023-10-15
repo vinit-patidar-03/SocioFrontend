@@ -1,19 +1,25 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { Avatars } from '../utils/Avatars';
 
 const UserProfileCard = (props) => {
 
-    const {post} = props;
+  const Navigate = useNavigate('');
+  const { post } = props;
 
   return (
     <>
-        <div className='flex my-10 items-center'>
-            <div className='w-10 cursor-pointer'>
-                   <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="logo" />
-            </div>
-            <div>
-                 <h3 className='ml-3 text-lg font-bold'>{post.name}</h3>
-            </div>
+      <div className='flex my-10 items-center'>
+        <div className='w-20 cursor-pointer' onClick={() => { Navigate('/profileEdit') }}>
+          {
+            <img src={ Avatars[post.avatar]} className='rounded full' alt="logo" />
+          }
         </div>
+        <div>
+          <h3 className='ml-2 text-lg font-bold'>{post.name}</h3>
+          <h5 className='ml-2'>{post.bio}</h5>
+        </div>
+      </div>
     </>
   )
 }
