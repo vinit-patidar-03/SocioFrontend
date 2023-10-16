@@ -41,6 +41,7 @@ const OtherUserProfileCard = () => {
                     </div>
                 }
                 <hr className='mx-10 border-black' />
+                <div className='flex flex-wrap justify-center'>
                 {userPosts &&
                     userPosts.map((elem,index) => {
                         return (
@@ -51,9 +52,8 @@ const OtherUserProfileCard = () => {
                             </div>
                         )
                     })
-
-
                 }
+                </div>
             </div>
         </div>
     )
