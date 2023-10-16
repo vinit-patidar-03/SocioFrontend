@@ -18,6 +18,7 @@ const UserProfileCard = (props) => {
         <div>
           <h3 className='ml-2 text-lg font-bold'>{post.name}</h3>
           <h5 className='ml-2'>{post.bio}</h5>
+          <a href={post.website} className='ml-2 text-blue-500' target='blank'>{post.website}</a>
         </div>
       </div>
     </>

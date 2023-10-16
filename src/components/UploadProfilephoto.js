@@ -8,14 +8,15 @@ const UploadProfilephoto = () => {
     const Navigate = useNavigate();
     const [avatar, setAvatar] = useState('');
     const [text, setText] = useState('');
+    const [website,setWebsite] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const { showAlert,setUpdate } = useContext(Context);
 
     const savePost = async () => {
 
-        if (avatar || text) {
-            const response = await axios.put("https://sociogrambackendapi.vercel.app/sociogram/auth/editProfile", JSON.stringify({ bio: text, avatar: avatar }), {
+        if (avatar || text || website) {
+            const response = await axios.put("https://sociogrambackendapi.vercel.app/sociogram/auth/editProfile", JSON.stringify({ bio: text, avatar: avatar, website: website}), {
                 headers: {
                     "Content-Type": "application/json",
                     "authToken": localStorage.getItem('token1')
@@ -66,6 +67,10 @@ const UploadProfilephoto = () => {
                                             )
                                         })
                                     }
+                                </div>
+                                <h1 className='py-2 font-bold text-xl'>Add Website</h1>
+                                <div className='flex text-sm'>
+                                     <input type="text" name="website" id="website" className='px-2 text-black' placeholder='website url' onChange={(event)=>{setWebsite(event.target.value)}} value={website}/>
                                 </div>
                                 <h1 className='py-2 font-bold text-xl'>Add Bio</h1>
                                 <div className='flex'>

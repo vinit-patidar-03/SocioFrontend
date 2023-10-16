@@ -31,7 +31,7 @@ const Profile = () => {
                 {user &&
                     <UserProfileCard post={user} />
                 }
-
+                <hr className='mx-10 border-black'/>
                 <div className='flex flex-wrap justify-center'>
                     {individualPosts.length !== 0 &&
                         individualPosts.map((elem, index) => {
