@@ -5,11 +5,12 @@ import Context from '../context/Context';
 
 const CommentCard = (props) => {
     const {comment} = props;
-    const {user} = useContext(Context);
+    const {user,fetchUserDetails} = useContext(Context);
     const [details,setDetails] = useState('');
     
     useEffect(()=>{
         fetchCommentedUser();
+        fetchUserDetails();
     },[])
 
     const fetchCommentedUser = async () =>{
