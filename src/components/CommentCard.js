@@ -19,7 +19,7 @@ const CommentCard = (props) => {
     }
   return (
     <>
-     <div className='w-[60%] m-auto commentCard'>{
+     <div className='w-[40vw] m-auto commentCard'>{
         details && user?
              <div className={`${comment.postedby === user._id ? 'bg-green-400':''} my-2`}>
                   <div className='flex items-center'>

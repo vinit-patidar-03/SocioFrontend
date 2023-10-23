@@ -41,7 +41,6 @@ const AppContext = (props) => {
                     "authToken": localStorage.getItem('token1')
                 }
             })
-            console.log(response);
             setUser(response.data);
             setUpdate(false);
         }
@@ -66,7 +65,6 @@ const AppContext = (props) => {
             }
         })
         setPost(response.data)
-        console.log(response.data);
     }
 
     const likePost = async (id) => {
@@ -76,26 +74,19 @@ const AppContext = (props) => {
             "authToken": localStorage.getItem('token1'),
           }
         })
-    
-        setLikestatus(response.data.success);
+        setLikestatus(response);
+        playSound();
       }
     
-      const likepostandUpdate = (id) => {
-         likePost(id) 
-         playSound();
-        }
 
-    const commentonPost = async (comment,id) =>{
-        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment',JSON.stringify({postId: id,comment}),{headers: {"Content-Type": "application/json","authToken": localStorage.getItem('token1')}});
-        console.log(response);
-        setLikestatus(response.data.success)
+    const commentonPost = async (id,comment) =>{
+       const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment',JSON.stringify({postId: id,comment}),{headers: {"Content-Type": "application/json","authToken": localStorage.getItem('token1')}});
+        playSound();
+        setLikestatus(response)
     }
 
-    const commentonPostandUpdate = (id,comment)=>{
-        commentonPost(comment,id);
-    }
     return (
-        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost,likepostandUpdate,likestatus, commentonPostandUpdate,update,setUpdate}}>
+        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost,likePost,likestatus, commentonPost,update,setUpdate}}>
             {props.children}
         </Context.Provider>
     )

@@ -35,8 +35,8 @@ const OtherUserProfileCard = () => {
                         </div>
                         <div>
                             <h3 className='ml-2 text-lg font-bold'>{userdetails.name}</h3>
-                            <h5 className='ml-2'>{userdetails.bio}</h5>
-                            <a href={userdetails.website} className='ml-2 text-blue-500' target='blank'>{userdetails.website}</a>
+                            <pre className='ml-2 text-sm' style={{fontFamily: 'Mukta'}}>{userdetails.bio}</pre>
+                            <a href={userdetails.website} className='ml-2 text-blue-500 text-sm' target='blank'>{userdetails.website}</a>
                         </div>
                     </div>
                 }

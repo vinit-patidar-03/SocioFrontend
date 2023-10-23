@@ -9,11 +9,11 @@ const CreatedPostCard = (props) => {
   const Navigate = useNavigate('')
   const [comment,setComment] = useState('');
   const { post } = props;
-  const { user,fetchPosts, likestatus, likepostandUpdate,commentonPostandUpdate } = useContext(Context);
+  const { user,fetchPosts, likestatus, likePost,commentonPost } = useContext(Context);
 
 
   useEffect(() => {
-    fetchPosts();
+      fetchPosts();
   }, [likestatus])
 
 
@@ -25,11 +25,11 @@ const CreatedPostCard = (props) => {
           <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate(`/otherUserProfile/${post.user}`) }}>{post.name}</h5>
         </div>
         <div className='m-auto p-2'>
-          <img src={post.photo} className='m-auto object-contain w-[90%]' alt="logo" />
+          <img src={post.photo} className='m-auto object-contain w-full' alt="logo" />
         </div>
         <div className='flex'>
           <div>
-            <i className={`fa-${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "solid" : "regular"} fa-heart ml-2 cursor-pointer fa-lg ${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "text-pink-500" : ""}`} onClick={() => { likepostandUpdate(post._id) }} title='like/dislike'></i>
+            <i className={`fa-${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "solid" : "regular"} fa-heart ml-2 cursor-pointer fa-lg ${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "text-pink-500" : ""}`} onClick={() => { likePost(post._id) }} title='like/dislike'></i>
             <p className='ml-2'>{post.likes.length} likes</p>
           </div>
           <div className='ml-5' onClick={() => { Navigate(`/comments/${post._id}`) }}>
@@ -39,9 +39,9 @@ const CreatedPostCard = (props) => {
  
         </div>
         <p className='m-2'>{post.description}</p>
-        <div className='ml-2'>
-          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[75%]' value={comment}/>
-          <button className='px-4 py-1 text-white bg-[#ff3f00] rounded-full ml-2 hover:bg-orange-600 transition-all hover:transition-all' onClick={()=>{commentonPostandUpdate(post._id,comment); setComment('')}}>Post</button>
+        <div className='m-2 w-[100%]'>
+          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[80%]' value={comment}/>
+          <button className='px-4 py-1 text-white bg-[#ff3f00] rounded-full ml-2 hover:bg-orange-600 transition-all hover:transition-all' onClick={()=>{commentonPost(post._id,comment); setComment('')}}>Post</button>
         </div>
       </div>
     }

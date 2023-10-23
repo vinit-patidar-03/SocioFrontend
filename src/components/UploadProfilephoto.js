@@ -13,9 +13,9 @@ const UploadProfilephoto = () => {
     const [message, setMessage] = useState('');
     const { showAlert, setUpdate } = useContext(Context);
 
-    const savePost = async () => {
-        setLoading(true);
+    const UpdateProfile = async () => {
         if (avatar && text && website) {
+            setLoading(true);
             const response = await axios.put("https://sociogrambackendapi.vercel.app/sociogram/auth/editProfile", JSON.stringify({ bio: text, avatar: avatar, website: website }), {
                 headers: {
                     "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const UploadProfilephoto = () => {
                             <h1 className='p-2 text-center font-bold text-xl'>Edit Your Profile</h1>
                             <hr />
                             <div className='p-2 flex flex-col'>
-                                <h1 className='py-2 font-bold text-xl'>Choose Your Avatar</h1>
+                                <h1 className='py-2 text-xl'>Choose Your Avatar</h1>
                                 <div className='flex flex-wrap'>
                                     {
                                         Avatars.map((elem, index) => {
@@ -70,16 +70,18 @@ const UploadProfilephoto = () => {
                                         })
                                     }
                                 </div>
-                                <h1 className='py-2 font-bold text-xl'>Add Website</h1>
+                                <h1 className='py-2 text-xl'>Add Website</h1>
                                 <div className='flex text-sm'>
-                                    <input type="text" name="website" id="website" className='px-2 text-black' placeholder='website url' onChange={(event) => { setWebsite(event.target.value) }} value={website} />
+                                    <input type="text" name="website" id="website" className='px-2 py-1 text-black w-[40%]' placeholder='website url' onChange={(event) => { setWebsite(event.target.value) }} value={website} />
                                 </div>
-                                <h1 className='py-2 font-bold text-xl'>Add Bio</h1>
+                                <h1 className='py-2  text-xl'>Add Bio</h1>
                                 <div className='flex'>
-                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-full' placeholder='write something about your post...' onChange={(event) => { setText(event.target.value) }}></textarea>
-                                    <button className='py-1 ml-2 px-5 rounded-full bg-[#ff8f00] transition-all border-4 border-white hover:bg-orange-500 hover:transition-all' onClick={savePost}><i className="fa-solid fa-arrow-right fa-xl"></i></button>
+                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-[40%]' placeholder='write something about your post...' onChange={(event) => { setText(event.target.value) }}></textarea>
                                 </div>
-                                <p className=' text-white'>{message}</p>
+                                <div>
+                                    <button className='py-1 my-4 px-5 rounded-full bg-[#ff8f00] transition-all border-4 border-white hover:bg-orange-500 hover:transition-all' onClick={UpdateProfile}>Update Profile</button>
+                                    <p className=' text-white'>{message}</p>
+                                </div>
                             </div>
                         </div>
                 }
