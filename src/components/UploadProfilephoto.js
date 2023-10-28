@@ -59,7 +59,7 @@ const UploadProfilephoto = () => {
                             <hr />
                             <div className='p-2 flex flex-col'>
                                 <h1 className='py-2 text-xl'>Choose Your Avatar</h1>
-                                <div className='flex flex-wrap'>
+                                <div className='flex flex-wrap justify-center'>
                                     {
                                         Avatars.map((elem, index) => {
                                             return (
@@ -72,11 +72,11 @@ const UploadProfilephoto = () => {
                                 </div>
                                 <h1 className='py-2 text-xl'>Add Website</h1>
                                 <div className='flex text-sm'>
-                                    <input type="text" name="website" id="website" className='px-2 py-1 text-black w-[40%]' placeholder='website url' onChange={(event) => { setWebsite(event.target.value) }} value={website} />
+                                    <input type="text" name="website" id="website" className='px-2 py-1 text-black w-[100%]' placeholder='website url' onChange={(event) => { setWebsite(event.target.value) }} value={website} />
                                 </div>
                                 <h1 className='py-2  text-xl'>Add Bio</h1>
                                 <div className='flex'>
-                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-[40%]' placeholder='write something about your post...' onChange={(event) => { setText(event.target.value) }}></textarea>
+                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-[100%]' placeholder='write something about your post...' onChange={(event) => { setText(event.target.value) }}></textarea>
                                 </div>
                                 <div>
                                     <button className='py-1 my-4 px-5 rounded-full bg-[#ff8f00] transition-all border-4 border-white hover:bg-orange-500 hover:transition-all' onClick={UpdateProfile}>Update Profile</button>
