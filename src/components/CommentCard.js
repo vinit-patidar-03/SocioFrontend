@@ -23,7 +23,7 @@ const CommentCard = (props) => {
         details && user?
              <div className={`${comment.postedby === user._id ? 'bg-green-400':''} my-2`}>
                   <div className='flex items-center'>
-                  <img src={Avatars[details.avatar]} className='w-10' alt="logo" />
+                  <img src={Avatars[details.avatar]} className='w-10' alt="logo" loading='lazy' />
                   <h3 className='font-bold'>{details.name}</h3>
                   </div>
                    <p className='ml-10 text-sm'>{comment.comment}</p>

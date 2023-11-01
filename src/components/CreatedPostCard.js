@@ -21,11 +21,11 @@ const CreatedPostCard = (props) => {
     <>{user && 
       <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[60%] createdPostCard'>
         <div className='m-2 flex items-center'>
-        <img src={Avatars[post.avatar]} className='w-10 rounded-full' alt="logo" />
+        <img src={Avatars[post.avatar]} className='w-16 rounded-full' alt="logo" />
           <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate(`/otherUserProfile/${post.user}`) }}>{post.name}</h5>
         </div>
         <div className='m-auto p-2'>
-          <img src={post.photo} className='m-auto object-contain w-full' alt="logo" />
+          <img src={post.photo} className='m-auto object-contain w-full' alt="logo" loading='lazy'/>
         </div>
         <div className='flex'>
           <div>

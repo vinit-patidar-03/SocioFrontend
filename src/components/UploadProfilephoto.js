@@ -52,7 +52,7 @@ const UploadProfilephoto = () => {
             <div className='h-[100%] w-[90%]  flex justify-center items-center m-auto mt-[80px] mb-[20px]'>
                 {
                     loading ?
-                        <img src="/images/spinner.gif" alt="loader" />
+                        <img src="/images/spinner.gif" alt="loader" loading='lazy'/>
                         :
                         <div className=' p-2 w-[70%] m-auto bg-[#ff5200] text-white rounded-2xl createPostCard flex flex-col justify-evenly'>
                             <h1 className='p-2 text-center font-bold text-xl'>Edit Your Profile</h1>
@@ -64,7 +64,7 @@ const UploadProfilephoto = () => {
                                         Avatars.map((elem, index) => {
                                             return (
                                                 <div className={`rounded-full m-2 cursor-pointer ${avatar === index ? 'bg-white' : ''}`} key={index} onClick={() => { setAvatar(index); }}>
-                                                    <img src={elem} alt='Avatar' className='w-20' />
+                                                    <img src={elem} alt='Avatar' className='w-20' loading='lazy' />
                                                 </div>
                                             )
                                         })

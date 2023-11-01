@@ -63,11 +63,11 @@ const PostCard = () => {
                             <h1 className='p-2 text-center font-bold text-xl'>Create Post and Share Your Best Time</h1>
                             <hr />
                             <div className='m-2 flex items-center'>
-                            <img src={Avatars[user.avatar]} className='w-10 rounded-full' alt="logo" />
+                            <img src={Avatars[user.avatar]} className='w-10 rounded-full' alt="logo" loading='lazy' />
                                 <h5 className='ml-2 font-bold'>{user.name}</h5>
                             </div>
                             <div className='py-3 h-[50vh]'>
-                                {preview ? <img src={preview} alt="preview" className=' h-[100%] m-auto' id='preview' /> : <img src='/images/default_images.png' className='h-[100%] m-auto' alt="preview" id='preview' />}
+                                {preview ? <img src={preview} alt="preview" className=' h-[100%] m-auto' id='preview' loading='lazy' /> : <img src='/images/default_images.png' className='h-[100%] m-auto' alt="preview" id='preview' loading='lazy' />}
                             </div>
                             <div className='p-2'>
                                 <input type="file" name="file" id="file" className='my-2 text-xs' onChange={selectFile} />

@@ -30,7 +30,7 @@ const OtherUserProfileCard = () => {
                     <div className='flex my-10 items-center'>
                         <div className='w-20 cursor-pointer'>
                             {
-                                <img src={Avatars[userdetails.avatar]} className='rounded full' alt="logo" />
+                                <img src={Avatars[userdetails.avatar]} className='rounded full' alt="logo" loading='lazy'/>
                             }
                         </div>
                         <div>
@@ -47,7 +47,7 @@ const OtherUserProfileCard = () => {
                         return (
                             <div className='cursor-pointer mt-10 mx-2 p-5 w-[293px] flex justify-center bg-orange-500 rounded-lg' key={index}>
                                 <div className='relative h-[30vh] transition-all hover:scale-110'>
-                                    <img src={elem.photo} className='h-full rounded-xl shadow-lg' alt="logo" />
+                                    <img src={elem.photo} className='h-full rounded-xl shadow-lg' alt="logo" loading='lazy' />
                                 </div>
                             </div>
                         )

@@ -12,7 +12,7 @@ const UserProfileCard = (props) => {
       <div className='flex my-10 items-center'>
         <div className='w-20 cursor-pointer' onClick={() => { Navigate('/profileEdit') }}>
           {
-            <img src={ Avatars[post.avatar]} className='rounded full' alt="logo" />
+            <img src={ Avatars[post.avatar]} className='rounded full' alt="logo" loading='lazy' />
           }
         </div>
         <div>
