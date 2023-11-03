@@ -63,7 +63,7 @@ const PostCard = () => {
                             <h1 className='p-2 text-center font-bold text-xl'>Create Post and Share Your Best Time</h1>
                             <hr />
                             <div className='m-2 flex items-center'>
-                            <img src={Avatars[user.avatar]} className='w-10 rounded-full' alt="logo" loading='lazy' />
+                            <img src={Avatars[user.avatar]} className='w-10 rounded-full' alt="logo" />
                                 <h5 className='ml-2 font-bold'>{user.name}</h5>
                             </div>
                             <div className='py-3 h-[50vh]'>

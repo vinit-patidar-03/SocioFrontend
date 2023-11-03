@@ -19,15 +19,15 @@ const CreatedPostCard = (props) => {
 
   return (
     <>{user && 
-      <div className='p-3 bg-[#ffffff] mx-auto my-3 rounded-lg  w-[60%] createdPostCard'>
-        <div className='m-2 flex items-center'>
+      <div className='p-3 bg-white mx-auto my-3 rounded-lg  w-[500px] createdPostCard'>
+        <div className='my-2 flex items-center'>
         <img src={Avatars[post.avatar]} className='w-16 rounded-full' alt="logo" />
           <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate(`/otherUserProfile/${post.user}`) }}>{post.name}</h5>
         </div>
-        <div className='m-auto p-2'>
-          <img src={post.photo} className='m-auto object-contain w-full' alt="logo" loading='lazy'/>
+        <div className='m-auto bg-gray-200 rounded-lg'>
+          <img src={post.photo} className='m-auto object-container max-h-[50vh]' alt="logo" loading='lazy'/>
         </div>
-        <div className='flex'>
+        <div className='flex mt-5'>
           <div>
             <i className={`fa-${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "solid" : "regular"} fa-heart ml-2 cursor-pointer fa-lg ${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "text-pink-500" : ""}`} onClick={() => { likePost(post._id) }} title='like/dislike'></i>
             <p className='ml-2'>{post.likes.length} likes</p>
