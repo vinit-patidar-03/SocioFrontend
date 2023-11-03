@@ -55,6 +55,7 @@ const AppContext = (props) => {
                     }
                 });
             setData(response.data.reverse());
+            console.log(response);
         }
     }
 
@@ -86,7 +87,7 @@ const AppContext = (props) => {
     }
 
     return (
-        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost,likePost,likestatus, commentonPost,update,setUpdate}}>
+        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost,likestatus,setLikestatus, commentonPost,update,setUpdate}}>
             {props.children}
         </Context.Provider>
     )

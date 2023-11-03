@@ -27,7 +27,7 @@ const Comments = () => {
                         <h3 className='text-center font-bold text-lg'>Comments</h3>
                         {
                             post.comments.map((elem, index) => {
-                                return <CommentCard comment={elem} key={index} />
+                                return <CommentCard comment={elem} postId={post._id} key={index} />
                             })
                         }
                     </div>
