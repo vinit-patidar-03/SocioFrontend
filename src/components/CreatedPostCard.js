@@ -40,7 +40,7 @@ const CreatedPostCard = (props) => {
         </div>
         <p className='m-2'>{post.description}</p>
         <div className='m-2 w-[95%]'>
-          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[80%]' value={comment}/>
+          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[75%]' value={comment}/>
           <button className='px-4 py-1 text-white bg-[#ff3f00] rounded-full ml-2 hover:bg-orange-600 transition-all hover:transition-all' onClick={()=>{commentonPost(post._id,comment); setComment('')}}>Post</button>
         </div>
       </div>
