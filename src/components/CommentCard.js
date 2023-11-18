@@ -27,13 +27,13 @@ const CommentCard = (props) => {
     <>
       <div className='w-[500px] m-auto commentCard'>
         {
-          (details && user) &&
+          details &&
           <div className={`${comment.postedby === user._id ? 'bg-green-400' : 'bg-gray-200'} my-2 relative`}>
             <div className='flex items-center'>
               <img src={Avatars[details.avatar]} className='w-10' alt="logo" />
               <h3 className='font-bold ml-2'>{details.name}</h3>
             </div>
-            <p className='ml-10 text-sm'>{comment.comment}</p>
+            <p className='ml-12 text-sm'>{comment.comment}</p>
             {
               (comment.postedby === user._id) &&
               <i className="fa-solid fa-trash absolute right-3 top-3 cursor-pointer text-red-600" onClick={deleteComment}></i>

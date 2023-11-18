@@ -17,21 +17,22 @@ const Comments = () => {
 
     return (
         <>
-            <div className='mt-20'>
-                { post &&
+            <div>{ post &&
+                <div className='mt-20'>
                     <div>
                         {
                             <CreatedPostCard post={post} />
                         }
 
                         <h3 className='text-center font-bold text-lg'>Comments</h3>
-                        {
+                        {post.comments.length !== 0 ?
                             post.comments.map((elem, index) => {
                                 return <CommentCard comment={elem} postId={post._id} key={index} />
-                            })
+                            }) : <h3 className='text-center mt-5'>No Comments</h3>
                         }
                     </div>
-                }
+                </div>
+            }
             </div>
         </>
     )

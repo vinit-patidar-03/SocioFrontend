@@ -17,8 +17,8 @@ const UserProfileCard = (props) => {
         </div>
         <div>
           <h3 className='ml-2 text-lg font-bold'>{post.name}</h3>
-          <pre className='ml-2' style={{fontFamily: 'Mukta'}}>{post.bio}</pre>
-          <a href={post.website} className='ml-2 text-blue-500' target='blank'>{post.website}</a>
+          {post.bio && <pre className='ml-2 text-xs' style={{fontFamily: 'Roboto'}}>{post.bio}</pre>}
+          {post.website && <a href={post.website} className='ml-2 text-blue-500' target='blank'>{post.website}</a>}
         </div>
       </div>
     </>

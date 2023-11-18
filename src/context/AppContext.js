@@ -5,23 +5,21 @@ import axios from 'axios';
 
 const AppContext = (props) => {
 
-    const [update,setUpdate] = useState(false);
+    const [update, setUpdate] = useState(false);
     const [user, setUser] = useState();
     const [data, setData] = useState();
     const [message, setMessage] = useState('');
-    const [post,setPost] = useState();
-    const [likestatus,setLikestatus] = useState();
+    const [post, setPost] = useState();
+    const [likestatus, setLikestatus] = useState();
 
-    useEffect(() => { 
-        setTimeout(()=>{
-            fetchPosts();
-            fetchUserDetails();
-        },1000)
+    useEffect(() => {
+        fetchPosts();
+        fetchUserDetails();
     }, [update])
 
-    const playSound = ()=>{
+    const playSound = () => {
         let audio = new Audio('/likesound.mp3');
-         audio.play();
+        audio.play();
     }
 
     const showAlert = (status, message) => {
@@ -60,6 +58,7 @@ const AppContext = (props) => {
     }
 
     const fetchPost = async (id) => {
+        setPost('');
         const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/post/${id}`, {
             headers: {
                 "Content-Type": "application/json"
@@ -69,25 +68,25 @@ const AppContext = (props) => {
     }
 
     const likePost = async (id) => {
-        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/like',  JSON.stringify({ postId: id }),{
-          headers: {
-            "Content-Type": "application/json",
-            "authToken": localStorage.getItem('token1'),
-          }
+        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/like', JSON.stringify({ postId: id }), {
+            headers: {
+                "Content-Type": "application/json",
+                "authToken": localStorage.getItem('token1'),
+            }
         })
         setLikestatus(response);
         playSound();
-      }
-    
+    }
 
-    const commentonPost = async (id,comment) =>{
-       const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment',JSON.stringify({postId: id,comment}),{headers: {"Content-Type": "application/json","authToken": localStorage.getItem('token1')}});
+
+    const commentonPost = async (id, comment) => {
+        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment', JSON.stringify({ postId: id, comment }), { headers: { "Content-Type": "application/json", "authToken": localStorage.getItem('token1') } });
         playSound();
         setLikestatus(response)
     }
 
     return (
-        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost,likestatus,setLikestatus, commentonPost,update,setUpdate}}>
+        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, likestatus, setLikestatus, commentonPost, update, setUpdate }}>
             {props.children}
         </Context.Provider>
     )

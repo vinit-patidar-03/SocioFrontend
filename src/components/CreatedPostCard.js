@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
 import { useNavigate } from 'react-router-dom';
+import { IoMdSend } from "react-icons/io";
 
 const CreatedPostCard = (props) => {
 
@@ -36,12 +37,11 @@ const CreatedPostCard = (props) => {
             <i className="fa-regular fa-comment fa-lg ml-2 cursor-pointer" title='comment'></i>
             <p className='ml-2'>{post.comments.length} comments</p>
           </div>
- 
         </div>
         <p className='m-2'>{post.description}</p>
-        <div className='m-2 w-[95%]'>
-          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[75%]' value={comment}/>
-          <button className='px-4 py-1 text-white bg-[#ff3f00] rounded-full ml-2 hover:bg-orange-600 transition-all hover:transition-all' onClick={()=>{commentonPost(post._id,comment); setComment('')}}>Post</button>
+        <div className='m-2 w-[95%] flex items-center'>
+          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[calc(100%-2rem)]' value={comment}/>
+          <button className='ml-2' onClick={()=>{commentonPost(post._id,comment); setComment('')}}><IoMdSend  className='text-orange-600 text-3xl hover:text-orange-400 transition-all hover:transition-all'/></button>
         </div>
       </div>
     }
