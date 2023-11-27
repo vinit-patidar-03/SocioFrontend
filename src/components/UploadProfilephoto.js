@@ -1,20 +1,26 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import { Avatars } from '../utils/Avatars';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Context from '../context/Context';
 const UploadProfilephoto = () => {
 
     const Navigate = useNavigate();
-    const [avatar, setAvatar] = useState('');
-    const [text, setText] = useState('');
-    const [website, setWebsite] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const bio = searchParams.get('bio');
+    const Avatar = searchParams.get('avatar');
+    const webUrl = searchParams.get('website');
+    const [avatar, setAvatar] = useState(parseInt(Avatar));
+    const [text, setText] = useState(bio);
+    const [website, setWebsite] = useState(webUrl);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const { showAlert, setUpdate } = useContext(Context);
 
+    
+
     const UpdateProfile = async () => {
-        if (avatar && text && website) {
+        if (avatar || text || website) {
             setLoading(true);
             const response = await axios.put("https://sociogrambackendapi.vercel.app/sociogram/auth/editProfile", JSON.stringify({ bio: text, avatar: avatar, website: website }), {
                 headers: {
@@ -36,7 +42,7 @@ const UploadProfilephoto = () => {
                 setLoading(false);
                 Navigate('/profile');
                 showAlert("success", "profile updated successfully")
-                setUpdate(true);
+                setUpdate(response.data);
             }
             else {
                 showAlert("danger", "some error occured");
@@ -76,7 +82,7 @@ const UploadProfilephoto = () => {
                                 </div>
                                 <h1 className='py-2  text-xl'>Add Bio</h1>
                                 <div className='flex'>
-                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-[100%]' placeholder='write something about your post...' onChange={(event) => { setText(event.target.value) }}></textarea>
+                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-[100%]' placeholder='write something about your post...' onChange={(event) => {setText(event.target.value) }} value={bio}></textarea>
                                 </div>
                                 <div>
                                     <button className='py-1 my-4 px-5 rounded-full bg-[#ff8f00] transition-all border-4 border-white hover:bg-orange-500 hover:transition-all' onClick={UpdateProfile}>Update Profile</button>

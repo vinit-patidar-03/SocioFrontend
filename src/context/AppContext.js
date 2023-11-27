@@ -42,6 +42,7 @@ const AppContext = (props) => {
             setUser(response.data);
             setUpdate(false);
         }
+        console.log(user);
     }
 
     const fetchPosts = async () => {

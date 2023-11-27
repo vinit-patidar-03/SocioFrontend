@@ -7,7 +7,7 @@ import axios from 'axios';
 const Profile = () => {
 
     const [individualPosts, setIndividualPosts] = useState('');
-    const { user,fetchUserDetails } = useContext(Context);
+    const { user, fetchUserDetails } = useContext(Context);
 
     useEffect(() => {
         fetchIndividualPosts();
@@ -29,9 +29,11 @@ const Profile = () => {
         <>
             <div className='p-2 mt-[75px]'>
                 {user &&
-                    <UserProfileCard post={user} />
+                    <div>
+                        <UserProfileCard post={user} />
+                        <hr className='mx-10 border-black' />
+                    </div>
                 }
-                <hr className='mx-10 border-black'/>
                 <div className='flex flex-wrap justify-center'>
                     {individualPosts.length !== 0 &&
                         individualPosts.map((elem, index) => {
