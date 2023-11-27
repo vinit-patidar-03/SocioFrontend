@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Context from '../context/Context';
 import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 const SignIn = () => {
 
@@ -35,7 +36,7 @@ const SignIn = () => {
     return (
         <>
             <div className='w-full h-[100vh] flex justify-center items-center'>
-            {status ? <img src='/images/login.gif' className=" w-32"  alt='login'/>: 
+            {
             <div className=' w-72 bg-[#ff532b] text-white rounded-xl p-3 flex flex-col items-center'>
                     <div className='p-3' style={{ fontFamily: "Mukta", fontSize: "1.5rem", fontWeight: "bold" }}>
                         <img src="/images/Sociogram.png" className='w-24 m-auto' alt="logo" />
@@ -58,7 +59,7 @@ const SignIn = () => {
                         <Link to='/signup' className='text-xs p-1 text-blue-700'>signup</Link>
                     </div>
                 </div>}
-               
+               {status && <Spinner />}
             </div>
         </>
     )

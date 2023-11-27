@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import Context from '../context/Context';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 const SignUp = () => {
 
@@ -67,6 +68,7 @@ const SignUp = () => {
                             <Link to='/login' className='text-xs p-1 text-blue-700'>signin</Link>
                         </div>
                     </div>}
+                    {status && <Spinner />}
             </div>
         </>
     )

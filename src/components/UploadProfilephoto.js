@@ -6,7 +6,7 @@ import Context from '../context/Context';
 const UploadProfilephoto = () => {
 
     const Navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const bio = searchParams.get('bio');
     const Avatar = searchParams.get('avatar');
     const webUrl = searchParams.get('website');
