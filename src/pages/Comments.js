@@ -17,16 +17,13 @@ const Comments = () => {
 
     return (
         <>
-            <div>{ post &&
+            <div>{post &&
                 <div className='mt-20'>
                     <div>
-                        {
-                            <CreatedPostCard post={post} />
-                        }
-
+                        <CreatedPostCard post={post} />
                         <h3 className='text-center font-bold text-lg'>Comments</h3>
                         {post.comments.length !== 0 ?
-                            post.comments.map((elem, index) => {
+                            Array.from(post.comments).reverse().map((elem, index) => {
                                 return <CommentCard comment={elem} postId={post._id} key={index} />
                             }) : <h3 className='text-center mt-5'>No Comments</h3>
                         }
