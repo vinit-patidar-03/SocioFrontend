@@ -82,7 +82,7 @@ const UploadProfilephoto = () => {
                                 </div>
                                 <h1 className='py-2  text-xl'>Add Bio</h1>
                                 <div className='flex'>
-                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-[100%]' placeholder='write something about your post...' onChange={(event) => {setText(event.target.value) }} value={bio}></textarea>
+                                    <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-[100%]' placeholder='write something about your post...' onChange={(event) => {setText(event.target.value) }} value={text}></textarea>
                                 </div>
                                 <div>
                                     <button className='py-1 my-4 px-5 rounded-full bg-[#ff8f00] transition-all border-4 border-white hover:bg-orange-500 hover:transition-all' onClick={UpdateProfile}>Update Profile</button>
