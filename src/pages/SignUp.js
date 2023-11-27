@@ -35,7 +35,7 @@ const SignUp = () => {
     return (
         <>
             <div className='w-full h-[100vh] flex justify-center items-center'>
-                {status ? <img src='/images/login.gif' className=" w-32" alt='login' /> :
+                { 
                     <div className=' w-72  bg-[#ff532b] text-white rounded-xl p-3 flex flex-col items-center'>
                         <div className='p-3' style={{ fontFamily: "Dancing Script", fontSize: "1.5rem", fontWeight: "bold" }}>
                             <img src="/images/Sociogram.png" className='w-24 m-auto' alt="logo" />
