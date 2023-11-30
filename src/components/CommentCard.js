@@ -28,7 +28,7 @@ const CommentCard = (props) => {
       <div className='w-[500px] m-auto commentCard'>
         {
           details &&
-          <div className={`${comment.postedby === user._id ? 'bg-green-400' : 'bg-gray-200'} my-2 relative`}>
+          <div className={`${comment.postedby === user._id ? 'bg-green-400' : 'bg-gray-200'} my-2 relative p-2 border-2 border-gray-500 rounded-xl`}>
             <div className='flex items-center'>
               <img src={Avatars[details.avatar]} className='w-10' alt="logo" />
               <h3 className='font-bold ml-2'>{details.name}</h3>

@@ -9,6 +9,7 @@ const CreatedPostCard = (props) => {
 
   const Navigate = useNavigate('')
   const [comment,setComment] = useState('');
+  const [warning, setWarning] = useState(false);
   const { post } = props;
   const { user,fetchPosts, likestatus, likePost,commentonPost } = useContext(Context);
 
@@ -18,6 +19,17 @@ const CreatedPostCard = (props) => {
   }, [likestatus])
 
 
+  const postComment = () => {
+    if(comment !== ''){
+      commentonPost(post._id,comment); 
+      setComment('');
+    }else{
+      setWarning(true);
+      setInterval(()=>{
+        setWarning(false);
+      },3000)
+    }
+  }
   return (
     <>{user && 
       <div className='p-3 bg-white mx-auto my-3 rounded-lg  w-[500px] createdPostCard'>
@@ -40,9 +52,10 @@ const CreatedPostCard = (props) => {
         </div>
         <p className='m-2'>{post.description}</p>
         <div className='m-2 w-[95%] flex items-center'>
-          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} required className='outline outline-1 text-sm p-1 w-[calc(100%-2rem)]' value={comment}/>
-          <button className='ml-2' onClick={()=>{commentonPost(post._id,comment); setComment('')}}><IoMdSend  className='text-orange-600 text-3xl hover:text-orange-400 transition-all hover:transition-all'/></button>
+          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event)=>{setComment(event.target.value)}} className='outline outline-1 text-sm p-1 w-[calc(100%-2rem)]' value={comment}/>
+          <button className='ml-2' onClick={postComment}><IoMdSend  className='text-orange-600 text-3xl hover:text-orange-400 transition-all hover:transition-all'/></button>
         </div>
+        {warning && <p className='text-sm ml-2 text-red-500'>Please write something to Post !!!</p>}
       </div>
     }
     </>

@@ -17,11 +17,13 @@ const AppContext = (props) => {
         fetchUserDetails();
     }, [update])
 
+    //SOUND FOR NOTIFICATIONS
     const playSound = () => {
         let audio = new Audio('/likesound.mp3');
         audio.play();
     }
 
+    //FOR SHOWING ALERTS
     const showAlert = (status, message) => {
         if (status === "success") {
             toast.success(message);
@@ -31,6 +33,7 @@ const AppContext = (props) => {
         }
     }
 
+    //FETCHING USER DETAILS
     const fetchUserDetails = async () => {
         if (localStorage.getItem("token1") !== null) {
             const response = await axios.get('https://sociogrambackendapi.vercel.app/sociogram/auth/getUser', {
@@ -42,9 +45,9 @@ const AppContext = (props) => {
             setUser(response.data);
             setUpdate(false);
         }
-        console.log(user);
     }
 
+    //FOR FETCHING POSTS FOR HOMEPAGE
     const fetchPosts = async () => {
         if (localStorage.getItem('token1')) {
             const response = await axios.get('https://sociogrambackendapi.vercel.app/sociogram/posts/posts',
@@ -54,10 +57,10 @@ const AppContext = (props) => {
                     }
                 });
             setData(response.data.reverse());
-            console.log(response);
         }
     }
 
+    //FOR FETCHING SINGLE POST FOR COMMENTS PAGE
     const fetchPost = async (id) => {
         setPost('');
         const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/post/${id}`, {
@@ -68,6 +71,7 @@ const AppContext = (props) => {
         setPost(response.data)
     }
 
+    //FOR UPDATE LIKES
     const likePost = async (id) => {
         const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/like', JSON.stringify({ postId: id }), {
             headers: {
@@ -80,6 +84,7 @@ const AppContext = (props) => {
     }
 
 
+    //FOR ADDING COMMENT ON POST
     const commentonPost = async (id, comment) => {
         const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment', JSON.stringify({ postId: id, comment }), { headers: { "Content-Type": "application/json", "authToken": localStorage.getItem('token1') } });
         playSound();
