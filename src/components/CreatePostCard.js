@@ -15,11 +15,13 @@ const PostCard = () => {
     const { user, showAlert,setUpdate } = useContext(Context);
 
 
+    //FOR SELECTING FILE AND CREATE PREVIEW
     const selectFile = (event) => {
         setPreview(URL.createObjectURL(event.target.files[0]));
         setImage(event.target.files[0]);
     }
 
+    //TO SAVE POST
     const savePost = async () => {
         if (image && text) {
             setLoading(true);
@@ -57,7 +59,7 @@ const PostCard = () => {
             <div className='h-[88vh] w-[90%]  flex justify-center items-center m-auto'>
                 {
                     loading ?
-                        <img src="/images/spinner.gif" alt="loader" />
+                        <img src="/images/SpinnerLogin.gif" className='w-40' alt="loader" />
                         :
                         <div className=' p-2 w-[70%] m-auto bg-[#ff5200] text-white rounded-2xl createPostCard flex flex-col justify-evenly'>
                             <h1 className='p-2 text-center font-bold text-xl'>Create Post and Share Your Best Time</h1>

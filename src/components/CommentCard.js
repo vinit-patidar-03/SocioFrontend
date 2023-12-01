@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Avatars } from '../utils/Avatars';
@@ -12,11 +13,13 @@ const CommentCard = (props) => {
     fetchCommentedUser();
   }, [])
 
+  //FOR FETCHING USER COMMENTED ON POST
   const fetchCommentedUser = async () => {
     const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/auth/getUser/${comment.postedby}`)
     setDetails(response.data);
   }
 
+  //FOR DELETE COMMENT
   const deleteComment = async () =>{
     const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/deleteComment',JSON.stringify({postId,commentId: comment._id}),{headers:{
       "Content-Type":"application/json"

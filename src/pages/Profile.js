@@ -40,8 +40,8 @@ const Profile = () => {
                             return <IndividualPostCard post={elem} key={index} />
                         })
                     }
-                    <h2 className='m-10 text-lg font-bold'>{individualPosts.length === 0 ? "Owner hasn't posted anything": ''}</h2>
                 </div>
+                <h2 className='m-10 text-lg font-bold'>{individualPosts.length === 0 ? "Owner hasn't posted anything": ''}</h2>
             </div>
         </>
     )
