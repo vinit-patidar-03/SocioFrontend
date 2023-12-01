@@ -95,7 +95,7 @@ const AppContext = (props) => {
 
     //FOR TOGGELING FOLLOWERS
     const addFollower = async (userId) => {
-         const result = await fetch(`http://localhost:5000/sociogram/auth/follow/${userId}`,{
+         const result = await fetch(`http://sociogrambackendapi.vercel.app/sociogram/auth/follow/${userId}`,{
             method: "PUT",
             headers :{
                 "Content-Type" : "application/json",
