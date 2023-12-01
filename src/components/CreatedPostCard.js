@@ -36,7 +36,7 @@ const CreatedPostCard = (props) => {
       <div className='p-3 bg-white mx-auto my-3 rounded-lg  w-[500px] createdPostCard'>
         <div className='my-2 flex items-center'>
           <img src={Avatars[post.avatar]} className='w-16 rounded-full' alt="logo" />
-          <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate(`/otherUserProfile/${post.user}`) }}>{post.name}</h5>
+          <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate(post.user !== user._id ?`/otherUserProfile/${post.user}`:'/profile') }}>{post.name}</h5>
         </div>
         <div className='m-auto bg-[#f8f8f8] rounded-lg w-[95%]'>
           <img src={post.photo} className='m-auto object-container max-h-[50vh]' alt="logo" loading='lazy' />

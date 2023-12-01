@@ -5,7 +5,9 @@ import axios from 'axios';
 
 const AppContext = (props) => {
 
+    //FOR REAL TIME POST UPDATES
     const [update, setUpdate] = useState(false);
+    const [followUpdate, setFollowUpdate] = useState(false);
     const [user, setUser] = useState();
     const [data, setData] = useState();
     const [message, setMessage] = useState('');
@@ -91,8 +93,22 @@ const AppContext = (props) => {
         setLikestatus(response)
     }
 
+    //FOR TOGGELING FOLLOWERS
+    const addFollower = async (userId) => {
+         const result = await fetch(`http://localhost:5000/sociogram/auth/follow/${userId}`,{
+            method: "PUT",
+            headers :{
+                "Content-Type" : "application/json",
+                "authToken" : localStorage.getItem('token1')
+            }
+         }) 
+          const response = await result.json();
+          setFollowUpdate(response);
+          playSound()
+    }
+
     return (
-        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, likestatus, setLikestatus, commentonPost, update, setUpdate }}>
+        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, likestatus, setLikestatus, commentonPost, update, setUpdate, addFollower, followUpdate, setFollowUpdate}}>
             {props.children}
         </Context.Provider>
     )

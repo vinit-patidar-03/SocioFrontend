@@ -41,7 +41,7 @@ const Profile = () => {
                         })
                     }
                 </div>
-                <h2 className='m-10 text-lg font-bold'>{individualPosts.length === 0 ? "Owner hasn't posted anything": ''}</h2>
+                <h2 className='m-10 text-lg font-bold text-center'>{individualPosts.length === 0 ? "Owner hasn't posted anything": ''}</h2>
             </div>
         </>
     )
