@@ -11,7 +11,6 @@ const OtherUserProfileCard = () => {
     const { addFollower, user, followUpdate } = useContext(Context);
     const [userdetails, setUserDetails] = useState(false);
     const [userPosts, setUserPosts] = useState(false);
-    console.log(user);
 
     useEffect(() => {
         fetchUser();
