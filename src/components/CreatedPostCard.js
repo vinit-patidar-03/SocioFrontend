@@ -53,7 +53,7 @@ const CreatedPostCard = (props) => {
         </div>
         <p className='m-2'>{post.description}</p>
         <div className='m-2 w-[95%] flex items-center'>
-          <input type="text" name="comment" id="comment" placeholder='write something to comment' onChange={(event) => { setComment(event.target.value) }} className='outline outline-1 text-sm p-1 w-[calc(100%-2rem)]' value={comment} />
+          <input type="text" name="comment"  placeholder='write something to comment' onChange={(event) => { setComment(event.target.value) }} className='outline outline-1 text-sm p-1 w-[calc(100%-2rem)]' value={comment} />
           <button className='ml-2' onClick={postComment}><IoMdSend className='text-orange-600 text-3xl hover:text-orange-400 transition-all hover:transition-all' /></button>
         </div>
         {warning && <p className='text-sm ml-2 text-red-500'>Please write something to Post !!!</p>}
