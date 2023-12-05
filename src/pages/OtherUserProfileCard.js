@@ -41,7 +41,7 @@ const OtherUserProfileCard = () => {
                                 <h3 className='ml-2 text-lg font-bold'>{userdetails.name}</h3>
                                 {userdetails.bio && <p className='ml-2 text-sm' style={{ fontFamily: 'Mukta' }}>{userdetails.bio}</p>}
                                 {userdetails.website && <a href={userdetails.website} className='ml-2 text-blue-500 text-sm' target='blank'>{userdetails.website}</a>}
-                                <button className='block ml-2 bg-gray-300 hover:bg-gray-200 transition-all hover:transition-all text-sm px-2 rounded-sm mt-2' onClick={() => { addFollower(id); }}>{userdetails.followers.includes(user._id) ? <p className='text-red-500'>Unfollow</p> : <p>Follow</p>}</button>
+                                <button className='block ml-2 bg-gray-300 hover:bg-gray-200 transition-all hover:transition-all text-sm px-2 rounded-sm mt-2' onClick={() => { addFollower(id); }}>{userdetails.followers.includes(user._id) ? <p className='text-red-500 w-full'>Unfollow</p> : <p className='w-full'>Follow</p>}</button>
                             </div>
                         </div>
                         <div className='flex justify-center items-center w-full sm:mr-20 sm:w-auto text-sm'>
