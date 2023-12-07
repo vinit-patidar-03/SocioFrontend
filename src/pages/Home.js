@@ -19,7 +19,6 @@ const Home = () => {
                     }
                 });
             setData(response.data);
-            console.log(response);
         }
     }, [])
 
