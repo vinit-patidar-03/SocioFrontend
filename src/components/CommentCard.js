@@ -6,7 +6,7 @@ import Context from '../context/Context';
 
 const CommentCard = (props) => {
   const { comment,postId } = props;
-  const { user,setLikestatus} = useContext(Context);
+  const { user, setImpressionStatus} = useContext(Context);
   const [details, setDetails] = useState('');
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const CommentCard = (props) => {
     const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/deleteComment',JSON.stringify({postId,commentId: comment._id}),{headers:{
       "Content-Type":"application/json"
      }})
-     setLikestatus(response);
+      setImpressionStatus(response);
   }
   return (
     <>

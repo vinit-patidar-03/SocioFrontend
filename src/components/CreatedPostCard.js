@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from 'react'
+ import React, { useContext, useState } from 'react'
 import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
 import { useNavigate } from 'react-router-dom';
@@ -11,13 +10,7 @@ const CreatedPostCard = (props) => {
   const [comment, setComment] = useState('');
   const [warning, setWarning] = useState(false);
   const { post } = props;
-  const { user, fetchPosts, likestatus, likePost, commentonPost } = useContext(Context);
-
-
-  useEffect(() => {
-    fetchPosts();
-  }, [likestatus])
-
+  const { user, likePost, commentonPost } = useContext(Context);
 
   //TO HANDLE WARNING MESSAGE
   const postComment = () => {

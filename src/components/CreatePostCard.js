@@ -13,7 +13,7 @@ const PostCard = () => {
     const [text, setText] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const { user, showAlert, setUpdate } = useContext(Context);
+    const { user, showAlert } = useContext(Context);
 
 
     //FOR SELECTING FILE AND CREATE PREVIEW
@@ -44,7 +44,7 @@ const PostCard = () => {
                 setLoading(false);
                 Navigate('/');
                 showAlert("success", "post created successfully")
-                setUpdate(true);
+                // setUpdate(true);
             }
             else {
                 showAlert("danger", "some error occured");
@@ -58,7 +58,7 @@ const PostCard = () => {
     return (
         <>
             <div className='h-[88vh] w-[90%]  flex justify-center items-center m-auto'>
-                {
+                {user &&
                     <div className=' p-2 w-[70%] m-auto bg-[#ff5200] text-white rounded-2xl createPostCard flex flex-col justify-evenly'>
                         <h1 className='p-2 text-center font-bold text-xl'>Create Post and Share Your Best Time</h1>
                         <hr />

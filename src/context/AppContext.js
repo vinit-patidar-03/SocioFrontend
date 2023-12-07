@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import Context from './Context'
 import axios from 'axios';
@@ -6,18 +6,16 @@ import axios from 'axios';
 const AppContext = (props) => {
 
     //FOR REAL TIME POST UPDATES
-    const [update, setUpdate] = useState(false);
     const [followUpdate, setFollowUpdate] = useState(false);
     const [user, setUser] = useState();
-    const [data, setData] = useState();
     const [message, setMessage] = useState('');
     const [post, setPost] = useState();
-    const [likestatus, setLikestatus] = useState();
+    const [impressionStatus, setImpressionStatus] = useState();
 
-    useEffect(() => {
-        fetchPosts();
+    useEffect(()=>{
         fetchUserDetails();
-    }, [update])
+    },[]);
+
 
     //SOUND FOR NOTIFICATIONS
     const playSound = () => {
@@ -45,33 +43,18 @@ const AppContext = (props) => {
                 }
             })
             setUser(response.data);
-            setUpdate(false);
-        }
-    }
-
-    //FOR FETCHING POSTS FOR HOMEPAGE
-    const fetchPosts = async () => {
-        if (localStorage.getItem('token1')) {
-            const response = await axios.get('https://sociogrambackendapi.vercel.app/sociogram/posts/posts',
-                {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                });
-            setData(response.data.reverse());
         }
     }
 
     //FOR FETCHING SINGLE POST FOR COMMENTS PAGE
-    const fetchPost = async (id) => {
-        setPost('');
+    const fetchPost = useCallback( async (id) => {
         const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/post/${id}`, {
             headers: {
                 "Content-Type": "application/json"
             }
         })
         setPost(response.data)
-    }
+    },[])
 
     //FOR UPDATE LIKES
     const likePost = async (id) => {
@@ -81,7 +64,7 @@ const AppContext = (props) => {
                 "authToken": localStorage.getItem('token1'),
             }
         })
-        setLikestatus(response);
+         setImpressionStatus(response);
         playSound();
     }
 
@@ -90,7 +73,7 @@ const AppContext = (props) => {
     const commentonPost = async (id, comment) => {
         const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment', JSON.stringify({ postId: id, comment }), { headers: { "Content-Type": "application/json", "authToken": localStorage.getItem('token1') } });
         playSound();
-        setLikestatus(response)
+        setImpressionStatus(response)
     }
 
     //FOR TOGGELING FOLLOWERS
@@ -108,7 +91,7 @@ const AppContext = (props) => {
     }
 
     return (
-        <Context.Provider value={{ user, setUser, data, setData, fetchPosts, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, likestatus, setLikestatus, commentonPost, update, setUpdate, addFollower, followUpdate, setFollowUpdate}}>
+        <Context.Provider value={{ user, setUser, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, impressionStatus, setImpressionStatus, commentonPost, addFollower, followUpdate, setFollowUpdate}}>
             {props.children}
         </Context.Provider>
     )

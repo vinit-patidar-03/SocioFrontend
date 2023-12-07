@@ -16,7 +16,7 @@ const Warning = (props) => {
 
     const deletePost = async () => {
 
-        const response = await fetch('http://localhost:5000/sociogram/posts/deletePost', {
+        const response = await fetch('https://sociogrambackendapi.vercel.app/sociogram/posts/deletePost', {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
