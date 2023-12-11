@@ -21,4 +21,4 @@ const IndividualPostCard = (props) => {
   )
 }
 
-export default IndividualPostCard
+export default IndividualPostCard;

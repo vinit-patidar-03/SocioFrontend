@@ -1,19 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import UserProfileCard from '../components/UserProfileCard';
 import IndividualPostCard from '../components/IndividualPostCard';
 import Context from '../context/Context';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
 
     const [individualPosts, setIndividualPosts] = useState('');
+    const Navigate = useNavigate();
     const { user, fetchUserDetails } = useContext(Context);
+
+    const userCheck = useCallback(() => {
+        if (localStorage.getItem('token1') === null) {
+            Navigate('/login');
+        }
+    }, [Navigate])
 
     useEffect(() => {
         fetchIndividualPosts();
         fetchUserDetails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        userCheck();
+    }, [fetchUserDetails, userCheck])
 
     const fetchIndividualPosts = async (event) => {
         const response = await axios.get('https://sociogrambackendapi.vercel.app/sociogram/posts/individualPosts', {

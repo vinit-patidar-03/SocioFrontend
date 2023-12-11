@@ -1,21 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { Avatars } from '../utils/Avatars'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import Context from '../context/Context';
 
 const OtherUserProfileCard = () => {
 
     const { id } = useParams();
+    const Navigate = useNavigate();
     const { addFollower, user, followUpdate } = useContext(Context);
     const [userdetails, setUserDetails] = useState(false);
     const [userPosts, setUserPosts] = useState(false);
 
+    const userCheck = useCallback(() => {
+        if (localStorage.getItem('token1') === null) {
+            Navigate('/login');
+        }
+    }, [Navigate])
+
     useEffect(() => {
         fetchUser();
         fetchuserPosts();
-    }, [followUpdate])
+        userCheck();
+    }, [followUpdate, userCheck])
 
     const fetchUser = async () => {
         const user = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/auth/getUser/${id}`, { headers: { "Content-Type": "application/json" } });
