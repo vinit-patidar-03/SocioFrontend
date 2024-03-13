@@ -20,11 +20,14 @@ const CommentCard = (props) => {
   }
 
   //FOR DELETE COMMENT
-  const deleteComment = async () =>{
-    const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/deleteComment',JSON.stringify({postId,commentId: comment._id}),{headers:{
+  const deleteComment = async () => {
+    setImpressionStatus({addComment: false, delComment: true})
+    await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/deleteComment',JSON.stringify({postId,commentId: comment._id}),{headers:{
       "Content-Type":"application/json"
-     }})
-      setImpressionStatus(response);
+    }
+    })
+
+      setImpressionStatus({addComment: false, delComment: false})
   }
   return (
     <>
@@ -39,7 +42,10 @@ const CommentCard = (props) => {
             <p className='ml-12 text-sm'>{comment.comment}</p>
             {
               (comment.postedby === user._id) &&
-              <i className="fa-solid fa-trash absolute right-3 top-3 cursor-pointer text-red-600" onClick={deleteComment}></i>
+                <i className="fa-solid fa-trash absolute right-3 top-3 cursor-pointer text-red-600" onClick={() => {
+                   deleteComment()
+                }
+              }></i>
             }
           </div>
         }

@@ -1,4 +1,4 @@
- import React, { useContext, useState } from 'react'
+ import React, { useContext,useEffect,useState } from 'react'
 import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
 import { useNavigate } from 'react-router-dom';
@@ -7,10 +7,12 @@ import { IoMdSend } from "react-icons/io";
 const CreatedPostCard = (props) => {
 
   const Navigate = useNavigate('')
+  const { user, likePost, commentonPost, impressionStatus} = useContext(Context);
   const [comment, setComment] = useState('');
   const [warning, setWarning] = useState(false);
   const { post } = props;
-  const { user, likePost, commentonPost } = useContext(Context);
+  const [like, setLike] = useState()
+  const [stats, setStats] = useState({comments:post.comments.length, likes: post.likes.length})
 
   //TO HANDLE WARNING MESSAGE
   const postComment = () => {
@@ -24,6 +26,14 @@ const CreatedPostCard = (props) => {
       }, 3000)
     }
   }
+
+  useEffect(() => {
+    setLike(user && post.likes.filter((elem) => { return elem === user._id }).length !== 0)
+    if (impressionStatus.delComment) {
+      setTimeout(() => { setStats({ ...stats, comments: stats.comments - 1 }) }, 3000)
+    }
+  },[impressionStatus, post.likes, stats, user])
+  
   return (
     <>{user &&
       <div className='p-3 bg-white mx-auto my-3 rounded-lg  w-[500px] createdPostCard'>
@@ -36,18 +46,32 @@ const CreatedPostCard = (props) => {
         </div>
         <div className='flex mt-5'>
           <div>
-            <i className={`fa-${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "solid" : "regular"} fa-heart ml-2 cursor-pointer fa-lg ${post.likes.filter((elem) => { return elem === user._id }).length !== 0 ? "text-pink-500" : ""}`} onClick={() => { likePost(post._id) }} title='like/dislike'></i>
-            <p className='ml-2'>{post.likes.length} likes</p>
+            <i className={`fa-${like ? "solid text-pink-500" : "regular"} fa-heart ml-2 cursor-pointer fa-lg`} onClick={() => {
+              likePost(post._id)
+              setTimeout(() => {
+                setLike((prev) => !prev)
+                if (like) {
+                  setStats({ ...stats, likes: stats.likes - 1 })
+                } else {
+                  setStats({ ...stats, likes: stats.likes + 1 })
+                }
+              },3000)
+            }} title='like/dislike'></i>
+            <p className='ml-2'>{stats.likes} likes</p>
           </div>
           <div className='ml-5' onClick={() => { Navigate(`/comments/${post._id}`) }}>
             <i className="fa-regular fa-comment fa-lg ml-2 cursor-pointer" title='comment'></i>
-            <p className='ml-2'>{post.comments.length} comments</p>
+            <p className='ml-2'>{stats.comments} comments</p>
           </div>
         </div>
         <p className='m-2'>{post.description}</p>
         <div className='m-2 w-[95%] flex items-center'>
           <input type="text" name="comment"  placeholder='write something to comment' onChange={(event) => { setComment(event.target.value) }} className='outline outline-1 text-sm p-1 w-[calc(100%-2rem)]' value={comment} />
-          <button className='ml-2' onClick={postComment}><IoMdSend className='text-orange-600 text-3xl hover:text-orange-400 transition-all hover:transition-all' /></button>
+          <button className='ml-2' onClick={() => {
+            postComment()
+            setTimeout(() => { setStats({ ...stats, comments: stats.comments + 1 }) }, 3000)
+          }
+          }><IoMdSend className='text-orange-600 text-3xl hover:text-orange-400 transition-all hover:transition-all' /></button>
         </div>
         {warning && <p className='text-sm ml-2 text-red-500'>Please write something to Post !!!</p>}
       </div>

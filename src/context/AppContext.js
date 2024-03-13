@@ -10,7 +10,7 @@ const AppContext = (props) => {
     const [user, setUser] = useState();
     const [message, setMessage] = useState('');
     const [post, setPost] = useState();
-    const [impressionStatus, setImpressionStatus] = useState();
+    const [impressionStatus, setImpressionStatus] = useState({addComment: false, delComment: false});
 
     useEffect(()=>{
         fetchUserDetails();
@@ -58,22 +58,22 @@ const AppContext = (props) => {
 
     //FOR UPDATE LIKES
     const likePost = async (id) => {
-        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/like', JSON.stringify({ postId: id }), {
+        await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/like', JSON.stringify({ postId: id }), {
             headers: {
                 "Content-Type": "application/json",
                 "authToken": localStorage.getItem('token1'),
             }
         })
-         setImpressionStatus(response);
         playSound();
     }
 
 
     //FOR ADDING COMMENT ON POST
     const commentonPost = async (id, comment) => {
-        const response = await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment', JSON.stringify({ postId: id, comment }), { headers: { "Content-Type": "application/json", "authToken": localStorage.getItem('token1') } });
+        setImpressionStatus({addComment: true, delComment: false})
+        await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment', JSON.stringify({ postId: id, comment }), { headers: { "Content-Type": "application/json", "authToken": localStorage.getItem('token1') } });
         playSound();
-        setImpressionStatus(response)
+        setImpressionStatus({addComment: false, delComment: false})
     }
 
     //FOR TOGGELING FOLLOWERS
