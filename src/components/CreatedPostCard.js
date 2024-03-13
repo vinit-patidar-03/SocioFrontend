@@ -11,7 +11,7 @@ const CreatedPostCard = (props) => {
   const [comment, setComment] = useState('');
   const [warning, setWarning] = useState(false);
   const { post } = props;
-  const [like, setLike] = useState()
+  const [like, setLike] = useState(user && post.likes.filter((elem) => { return elem === user._id }).length !== 0)
   const [stats, setStats] = useState({comments:post.comments.length, likes: post.likes.length})
 
   //TO HANDLE WARNING MESSAGE
@@ -28,7 +28,6 @@ const CreatedPostCard = (props) => {
   }
 
   useEffect(() => {
-    setLike(user && post.likes.filter((elem) => { return elem === user._id }).length !== 0)
     if (impressionStatus.delComment) {
       setTimeout(() => { setStats({ ...stats, comments: stats.comments - 1 }) }, 3000)
     }
@@ -49,11 +48,12 @@ const CreatedPostCard = (props) => {
             <i className={`fa-${like ? "solid text-pink-500" : "regular"} fa-heart ml-2 cursor-pointer fa-lg`} onClick={() => {
               likePost(post._id)
               setTimeout(() => {
-                setLike((prev) => !prev)
                 if (like) {
                   setStats({ ...stats, likes: stats.likes - 1 })
+                   setLike(false)
                 } else {
                   setStats({ ...stats, likes: stats.likes + 1 })
+                   setLike(true)
                 }
               },3000)
             }} title='like/dislike'></i>
