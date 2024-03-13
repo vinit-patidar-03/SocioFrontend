@@ -29,7 +29,7 @@ const CreatedPostCard = (props) => {
 
   useEffect(() => {
     if (impressionStatus.delComment) {
-      setTimeout(() => { setStats({ ...stats, comments: stats.comments - 1 }) }, 3000)
+      setStats({ ...stats, comments: stats.comments - 1 })
     }
   },[impressionStatus, post.likes, stats, user])
   
@@ -47,7 +47,6 @@ const CreatedPostCard = (props) => {
           <div>
             <i className={`fa-${like ? "solid text-pink-500" : "regular"} fa-heart ml-2 cursor-pointer fa-lg`} onClick={() => {
               likePost(post._id)
-              setTimeout(() => {
                 if (like) {
                   setStats({ ...stats, likes: stats.likes - 1 })
                    setLike(false)
@@ -55,7 +54,6 @@ const CreatedPostCard = (props) => {
                   setStats({ ...stats, likes: stats.likes + 1 })
                    setLike(true)
                 }
-              },3000)
             }} title='like/dislike'></i>
             <p className='ml-2'>{stats.likes} likes</p>
           </div>

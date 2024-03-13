@@ -13,6 +13,7 @@ const Navbar = () => {
 
   const alertLogout = () => {
     setMessage("Logout");
+    localStorage.removeItem('token1');
   }
   return (
     <>
