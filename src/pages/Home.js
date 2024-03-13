@@ -13,17 +13,15 @@ const Home = () => {
 
     const fetchPosts = useCallback(async () => {
         if (localStorage.getItem('token1')) {
-            const response = await axios.get(`http://localhost:5000/sociogram/posts/posts?skip=${skip}&limit=10`,
+            const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/posts?skip=${skip}&limit=10`,
                 {
                     headers: {
                         "Content-Type": "application/json"
                     }
                 });
-            setData(data.concat(response.data));
+            setData((prev)=>prev.concat(response.data));
         }
     }, [skip])
-
-    console.log(skip);
 
     const userCheck = useCallback(() => {
         if (localStorage.getItem('token1') === null) {
