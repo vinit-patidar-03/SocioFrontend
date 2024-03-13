@@ -11,7 +11,7 @@ const CreatedPostCard = (props) => {
   const [comment, setComment] = useState('');
   const [warning, setWarning] = useState(false);
   const { post } = props;
-  const [like, setLike] = useState(user && post.likes.filter((elem) => { return elem === user._id }).length !== 0)
+  const [like, setLike] = useState()
   const [stats, setStats] = useState({comments:post.comments.length, likes: post.likes.length})
 
   //TO HANDLE WARNING MESSAGE
@@ -28,10 +28,14 @@ const CreatedPostCard = (props) => {
   }
 
   useEffect(() => {
+    setLike(user && post.likes.filter((elem) => { return elem === user._id }).length !== 0)
+  },[post.likes, user])
+
+  useEffect(() => {
     if (impressionStatus.delComment) {
       setStats({ ...stats, comments: stats.comments - 1 })
     }
-  },[impressionStatus, post.likes, stats, user])
+  },[impressionStatus, stats])
   
   return (
     <>{user &&
