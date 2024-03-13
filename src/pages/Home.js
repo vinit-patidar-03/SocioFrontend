@@ -7,20 +7,23 @@ import Spinner from '../components/Spinner';
 
 const Home = () => {
     const Navigate = useNavigate('');
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
+    const [skip, setSkip] = useState(0);
     const { impressionStatus } = useContext(Context);
 
     const fetchPosts = useCallback(async () => {
         if (localStorage.getItem('token1')) {
-            const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/posts`,
+            const response = await axios.get(`http://localhost:5000/sociogram/posts/posts?skip=${skip}&limit=10`,
                 {
                     headers: {
                         "Content-Type": "application/json"
                     }
                 });
-            setData(response.data);
+            setData(data.concat(response.data));
         }
-    }, [])
+    }, [skip])
+
+    console.log(skip);
 
     const userCheck = useCallback(() => {
         if (localStorage.getItem('token1') === null) {
@@ -28,11 +31,18 @@ const Home = () => {
         }
     }, [Navigate])
 
-
+    const handleScroll = useCallback(() =>
+        {
+            if (Math.ceil(document.documentElement.clientHeight + document.documentElement.scrollTop) >= document.documentElement.scrollHeight) {
+                setSkip((prev)=>prev+10)
+             }
+        },[])
     useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
         userCheck();
         fetchPosts();
-    }, [impressionStatus, fetchPosts, userCheck]);
+        return () => { window.removeEventListener('scroll', handleScroll) }
+    }, [impressionStatus, fetchPosts, userCheck, handleScroll]);
 
     return (
         <>
