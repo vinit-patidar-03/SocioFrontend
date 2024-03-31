@@ -13,14 +13,13 @@ const Navbar = () => {
 
   const alertLogout = () => {
     setMessage("Logout");
-    localStorage.removeItem('token1');
   }
   return (
     <>
       <nav className='bg-white flex items-center justify-center fixed top-0 w-full shadow-md z-50'>
         <ul className='flex justify-between items-center w-full p-1'>
           <li>
-            <img src="/images/SociogramLogo.png" className='h-16 cursor-pointer' alt="logo" onClick={()=>{Navigate('/')}} />
+            <img src="/images/SociogramLogo.png" className='h-16 cursor-pointer' alt="logo" onClick={() => { Navigate('/') }} />
           </li>
           <li>
             <Link to='/' className={`btn rounded-full py-1 px-3 mx-1 ${location.pathname === '/login' || location.pathname === '/signup' ? 'hidden' : ''}`}><i className="fa-solid fa-house fa-lg"></i></Link>
