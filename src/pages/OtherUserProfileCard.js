@@ -83,6 +83,7 @@ const OtherUserProfileCard = () => {
                         })
                     }
                 </div>
+                <h2 className='m-10 text-lg font-bold text-center'>{userPosts.length === 0 ? "Owner hasn't posted anything" : ''}</h2>
                 {showFollower.status && <FollowersModal followers={userdetails.followers} followings={userdetails.followings} setShowfollowers={setShowfollowers} showFollower={showFollower} />}
             </div>
         </div>
