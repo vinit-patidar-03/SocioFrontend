@@ -1,13 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
+import FollowersModal from './FollowersModal';
 
 const UserProfileCard = (props) => {
 
   const Navigate = useNavigate('');
   const { post } = props;
   const { user } = useContext(Context);
+  const [showFollower, setShowfollowers] = useState({ status: false, tabName: "" });
 
   return (
     <>
@@ -21,20 +23,21 @@ const UserProfileCard = (props) => {
           <div>
             <h3 className='ml-2 text-lg font-bold'>{post.name}</h3>
             {post.bio && <p className='ml-2 text-sm' style={{ fontFamily: 'Roboto' }}>{post.bio}</p>}
-            {post.website  && <a href={post.website} className='ml-2 text-blue-500 text-sm' target='blank'>{post.website}</a>}
+            {post.website && <a href={post.website} className='ml-2 text-blue-500 text-sm' target='blank'>{post.website}</a>}
           </div>
         </div>
         <div className='flex justify-center items-center w-full sm:mr-20 sm:w-auto text-sm'>
-          <div className='mx-5 text-center p-2'>
+          <div className='mx-5 text-center p-2 cursor-pointer' onClick={() => { setShowfollowers({ status: true, tabName: "Followers" }) }}>
             <p>Followers</p>
             <p>{post.followers.length}</p>
           </div>
-          <div className='mx-5 text-center p-2'>
+          <div className='mx-5 text-center p-2 cursor-pointer' onClick={() => { setShowfollowers({ status: true, tabName: "Followings" }) }}>
             <p>Followings</p>
             <p>{post.followings.length}</p>
           </div>
         </div>
       </div>
+      {showFollower.status && <FollowersModal followers={post.followers} followings={post.followings} setShowfollowers={setShowfollowers} showFollower={showFollower} />}
     </>
   )
 }

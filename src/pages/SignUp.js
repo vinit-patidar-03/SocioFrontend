@@ -35,7 +35,7 @@ const SignUp = () => {
     return (
         <>
             <div className='w-full h-[100vh] flex justify-center items-center'>
-                { 
+                {
                     <div className=' w-72  bg-[#ff532b] text-white rounded-xl p-3 flex flex-col items-center'>
                         <div className='p-3' style={{ fontFamily: "Dancing Script", fontSize: "1.5rem", fontWeight: "bold" }}>
                             <img src="/images/Sociogram.png" className='w-24 m-auto' alt="logo" />
@@ -43,11 +43,11 @@ const SignUp = () => {
                         <div className='p-3'>
                             <form action="login" className='flex flex-col items-center'>
                                 <div className='userInput relative'>
-                                    <input type="text" className='my-2 py-1 px-2 text-sm text-black outline-none z-20' id='name' autoComplete='name' name='name' required onChange={userDetails} />
+                                    <input type="text" className='my-2 py-1 px-2 text-sm text-black outline-none z-20' id='name' autoComplete='off' name='name' required onChange={userDetails} />
                                     <label htmlFor="name" className='absolute left-2 top-2 py-2 text-xs text-slate-400 cursor-text'>name</label>
                                 </div>
                                 <div className='userInput relative'>
-                                    <input type="email" className='my-2 py-1 px-2 text-sm text-black outline-none z-20' id='email' autoComplete='email' name='email' required onChange={userDetails} />
+                                    <input type="email" className='my-2 py-1 px-2 text-sm text-black outline-none z-20' id='email' autoComplete='off' name='email' required onChange={userDetails} />
                                     <label htmlFor="email" className='absolute left-2 top-2 py-2 text-xs text-slate-400 cursor-text'>email</label>
                                 </div>
                                 <div className='passInput relative'>
@@ -68,7 +68,7 @@ const SignUp = () => {
                             <Link to='/login' className='text-xs p-1 text-blue-700'>signin</Link>
                         </div>
                     </div>}
-                    {status && <Spinner />}
+                {status && <Spinner />}
             </div>
         </>
     )

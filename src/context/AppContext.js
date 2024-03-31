@@ -10,11 +10,11 @@ const AppContext = (props) => {
     const [user, setUser] = useState();
     const [message, setMessage] = useState('');
     const [post, setPost] = useState();
-    const [impressionStatus, setImpressionStatus] = useState({addComment: false, delComment: false});
+    const [impressionStatus, setImpressionStatus] = useState({ addComment: false, delComment: false });
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchUserDetails();
-    },[]);
+    }, []);
 
 
     //SOUND FOR NOTIFICATIONS
@@ -47,14 +47,14 @@ const AppContext = (props) => {
     }
 
     //FOR FETCHING SINGLE POST FOR COMMENTS PAGE
-    const fetchPost = useCallback( async (id) => {
+    const fetchPost = useCallback(async (id) => {
         const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/post/${id}`, {
             headers: {
                 "Content-Type": "application/json"
             }
         })
         setPost(response.data)
-    },[])
+    }, [])
 
     //FOR UPDATE LIKES
     const likePost = async (id) => {
@@ -70,28 +70,28 @@ const AppContext = (props) => {
 
     //FOR ADDING COMMENT ON POST
     const commentonPost = async (id, comment) => {
-        setImpressionStatus({addComment: true, delComment: false})
+        setImpressionStatus({ addComment: true, delComment: false })
         await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/comment', JSON.stringify({ postId: id, comment }), { headers: { "Content-Type": "application/json", "authToken": localStorage.getItem('token1') } });
         playSound();
-        setImpressionStatus({addComment: false, delComment: false})
+        setImpressionStatus({ addComment: false, delComment: false })
     }
 
     //FOR TOGGELING FOLLOWERS
     const addFollower = async (userId) => {
-         const result = await fetch(`https://sociogrambackendapi.vercel.app/sociogram/auth/follow/${userId}`,{
+        const result = await fetch(`https://sociogrambackendapi.vercel.app/sociogram/auth/follow/${userId}`, {
             method: "PUT",
-            headers :{
-                "Content-Type" : "application/json",
-                "authToken" : localStorage.getItem('token1')
+            headers: {
+                "Content-Type": "application/json",
+                "authToken": localStorage.getItem('token1')
             }
-         }) 
-          const response = await result.json();
-          setFollowUpdate(response);
-          playSound()
+        })
+        const response = await result.json();
+        setFollowUpdate(response);
+        playSound()
     }
 
     return (
-        <Context.Provider value={{ user, setUser, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, impressionStatus, setImpressionStatus, commentonPost, addFollower, followUpdate, setFollowUpdate}}>
+        <Context.Provider value={{ user, setUser, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, impressionStatus, setImpressionStatus, commentonPost, addFollower, followUpdate, setFollowUpdate }}>
             {props.children}
         </Context.Provider>
     )

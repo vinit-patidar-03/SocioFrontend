@@ -4,6 +4,7 @@ import { Avatars } from '../utils/Avatars'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import Context from '../context/Context';
+import FollowersModal from '../components/FollowersModal';
 
 const OtherUserProfileCard = () => {
 
@@ -12,12 +13,15 @@ const OtherUserProfileCard = () => {
     const { addFollower, user, followUpdate } = useContext(Context);
     const [userdetails, setUserDetails] = useState(false);
     const [userPosts, setUserPosts] = useState(false);
+    const [showFollower, setShowfollowers] = useState({ status: false, tabName: "" });
 
     const userCheck = useCallback(() => {
         if (localStorage.getItem('token1') === null) {
             Navigate('/login');
         }
     }, [Navigate])
+
+    console.log(userdetails.followers);
 
     useEffect(() => {
         fetchUser();
@@ -49,15 +53,15 @@ const OtherUserProfileCard = () => {
                                 <h3 className='ml-2 text-lg font-bold'>{userdetails.name}</h3>
                                 {userdetails.bio && <p className='ml-2 text-sm' style={{ fontFamily: 'Mukta' }}>{userdetails.bio}</p>}
                                 {userdetails.website && <a href={userdetails.website} className='ml-2 text-blue-500 text-sm' target='blank'>{userdetails.website}</a>}
-                                <button className='block ml-2 bg-gray-300 hover:bg-gray-200 transition-all hover:transition-all text-sm px-2 rounded-sm mt-2' onClick={() => { addFollower(id); }}>{userdetails.followers.includes(user._id) ? <p className='text-red-500 w-full'>Unfollow</p> : <p className='w-full'>Follow</p>}</button>
+                                <button className='block ml-2 bg-gray-300 hover:bg-gray-200 transition-all hover:transition-all text-sm px-2 rounded-sm mt-2' onClick={() => { addFollower(id); }}>{(userdetails.followers.map((item) => { return item._id === user._id }) && userdetails.followers.length !== 0) ? <p className='text-red-500 w-full'>Unfollow</p> : <p className='w-full'>Follow</p>}</button>
                             </div>
                         </div>
                         <div className='flex justify-center items-center w-full sm:mr-20 sm:w-auto text-sm'>
-                            <div className='mx-5 text-center p-2'>
+                            <div className='mx-5 text-center p-2 cursor-pointer' onClick={() => { setShowfollowers({ status: true, tabName: "Followers" }) }}>
                                 <p>Followers</p>
                                 <p>{userdetails.followers.length}</p>
                             </div>
-                            <div className='mx-5 text-center p-2'>
+                            <div className='mx-5 text-center p-2 cursor-pointer' onClick={() => { setShowfollowers({ status: true, tabName: "Followings" }) }}>
                                 <p>Followings</p>
                                 <p>{userdetails.followings.length}</p>
                             </div>
@@ -72,13 +76,14 @@ const OtherUserProfileCard = () => {
                             return (
                                 <div className='cursor-pointer mt-10 mx-2 p-5 w-[293px] flex justify-center bg-orange-500 rounded-lg' key={index}>
                                     <div className='relative h-[30vh] transition-all hover:scale-110'>
-                                        <img src={elem.photo.replace('http','https')} className='h-full rounded-xl shadow-lg' alt="logo" />
+                                        <img src={elem.photo.replace('http', 'https')} className='h-full rounded-xl shadow-lg' alt="logo" />
                                     </div>
                                 </div>
                             )
                         })
                     }
                 </div>
+                {showFollower.status && <FollowersModal followers={userdetails.followers} followings={userdetails.followings} setShowfollowers={setShowfollowers} showFollower={showFollower} />}
             </div>
         </div>
     )
