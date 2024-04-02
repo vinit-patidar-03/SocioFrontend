@@ -3,19 +3,18 @@ import Context from '../context/Context';
 
 const IndividualPostCard = (props) => {
   const { post } = props;
-  const {setMessage} = useContext(Context);
+  const { setMessage } = useContext(Context);
 
   const deletePostAlert = () => {
-        setMessage(post._id);
-    }
+    setMessage(post._id);
+  }
 
   return (
     <>
-      <div className='cursor-pointer mt-10 mx-2 p-5 w-[293px] flex justify-center bg-orange-500 rounded-lg'>
-        <div className='relative h-[30vh] transition-all hover:scale-110'>
-          <img src={post.photo.replace('http','https')} className='h-full rounded-xl shadow-lg' alt="logo" />
-          <i className="fa-solid fa-trash absolute right-3 top-3 cursor-pointer text-red-600" onClick={deletePostAlert}></i>
-        </div>
+
+      <div className='relative my-3 mx-3 md:w-[30%] sm:w-[45%] w-[100%] h-[30%] bg-[#f8f8f8] rounded-lg shadow-[0_0px_10px_rgba(0,0,0,0.3)] sm:h-[40vh] transition-all hover:scale-105'>
+        <img src={post.photo.replace('http', 'https')} className='w-full cursor-pointer rounded-lg h-full object-contain object-center' alt="logo" />
+        <i className="fa-solid fa-trash absolute right-1 top-1 bg-gray-200 p-2 rounded-full cursor-pointer text-red-600" onClick={deletePostAlert}></i>
       </div>
     </>
   )

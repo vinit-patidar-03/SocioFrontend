@@ -40,7 +40,7 @@ const Profile = () => {
                 {user &&
                     <div>
                         <UserProfileCard post={user} />
-                        <hr className='mx-10 border-black' />
+                        <hr className='mx-10 mb-3 border-black' />
                     </div>
                 }
                 <div className='flex flex-wrap justify-center'>
@@ -50,7 +50,7 @@ const Profile = () => {
                         })
                     }
                 </div>
-                <h2 className='m-10 text-lg font-bold text-center'>{individualPosts.length === 0 ? "Owner hasn't posted anything": ''}</h2>
+                <h2 className='m-10 text-lg font-bold text-center'>{individualPosts.length === 0 ? "Owner hasn't posted anything" : ''}</h2>
             </div>
         </>
     )

@@ -1,5 +1,5 @@
 import './App.css';
-import {Toaster} from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PostPage from './pages/Post';
@@ -15,24 +15,24 @@ import OtherUserProfileCard from './pages/OtherUserProfileCard';
 import UploadProfilephoto from './components/UploadProfilephoto';
 
 function App() {
-  const {message} = useContext(Context);
+  const { message } = useContext(Context);
   return (
     <>
       <Router>
         <Navbar />
         <Toaster
-                position="bottom-center"
-                reverseOrder={false}
-            />
+          position="bottom-center"
+          reverseOrder={false}
+        />
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route exact path='/profile' element={<Profile />} />
           <Route exact path='/post' element={<PostPage />} />
           <Route exact path='/login' element={<SignIn />} />
           <Route exact path='/signup' element={<SignUp />} />
-          <Route exact path='/profileEdit' element={<UploadProfilephoto/>} />
-          <Route exact path='/comments/:id' element={<Comments />}/>
-          <Route exact path='/otherUserProfile/:id' element={<OtherUserProfileCard />}/>
+          <Route exact path='/profileEdit' element={<UploadProfilephoto />} />
+          <Route exact path='/comments/:id' element={<Comments />} />
+          <Route exact path='/otherUserProfile/:id' element={<OtherUserProfileCard />} />
         </Routes>
         <Warning message={message} />
       </Router>
