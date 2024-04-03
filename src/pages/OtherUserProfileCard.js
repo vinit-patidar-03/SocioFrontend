@@ -74,10 +74,9 @@ const OtherUserProfileCard = () => {
                     {userPosts &&
                         userPosts.map((elem, index) => {
                             return (
-                                <div className='cursor-pointer mt-10 mx-2 p-5 w-[293px] flex justify-center bg-orange-500 rounded-lg' key={index}>
-                                    <div className='relative h-[30vh] transition-all hover:scale-110'>
-                                        <img src={elem.photo.replace('http', 'https')} className='h-full rounded-xl shadow-lg' alt="logo" />
-                                    </div>
+
+                                <div className='relative my-3 mx-3 md:w-[30%] sm:w-[45%] w-[100%] h-[30%] bg-[#f8f8f8] rounded-lg shadow-[0_0px_10px_rgba(0,0,0,0.3)] sm:h-[40vh] transition-all hover:scale-105'>
+                                    <img src={elem.photo.replace('http', 'https')} className='w-full cursor-pointer rounded-lg h-full object-contain object-center' alt="logo" />
                                 </div>
                             )
                         })

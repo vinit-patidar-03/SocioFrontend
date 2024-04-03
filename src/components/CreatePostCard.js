@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { IoMdSend } from "react-icons/io";
 import Context from '../context/Context';
 import { Avatars } from '../utils/Avatars';
 import Spinner from './Spinner.js'
@@ -59,8 +60,8 @@ const PostCard = () => {
         <>
             <div className='h-[88vh] w-[90%]  flex justify-center items-center m-auto'>
                 {user &&
-                    <div className=' p-2 w-[70%] m-auto bg-[#ff5200] text-white rounded-2xl createPostCard flex flex-col justify-evenly'>
-                        <h1 className='p-2 text-center font-bold text-xl'>Create Post and Share Your Best Time</h1>
+                    <div className=' p-2 w-[70%] m-auto bg-[#ffffff] shadow-[0_0px_10px_rgba(0,0,0,0.3)] text-black rounded-2xl createPostCard flex flex-col justify-evenly'>
+                        <h1 className='p-2 text-center font-bold text-xl'> Share Your Post</h1>
                         <hr />
                         <div className='m-2 flex items-center'>
                             <img src={Avatars[user.avatar]} className='w-10 rounded-full' alt="logo" />
@@ -71,9 +72,9 @@ const PostCard = () => {
                         </div>
                         <div className='p-2'>
                             <input type="file" name="file" id="file" className='my-2 text-xs' onChange={selectFile} />
-                            <div className='flex'>
+                            <div className='flex items-center'>
                                 <textarea name="description" id="description" className='border-2  text-black px-2 text-sm w-full' placeholder='write something about your post...' onChange={(event) => { setText(event.target.value) }}></textarea>
-                                <button className='py-1 ml-2 px-5 rounded-full bg-[#ff8f00] transition-all border-4 border-white hover:bg-orange-500 hover:transition-all' onClick={savePost}><i className="fa-solid fa-arrow-right fa-xl"></i></button>
+                                <IoMdSend className='text-orange-600 text-5xl ml-3 hover:text-orange-400 transition-all hover:transition-all cursor-pointer' onClick={savePost} />
                             </div>
                             <p className=' text-white'>{message}</p>
                         </div>
