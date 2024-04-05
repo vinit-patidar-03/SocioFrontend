@@ -6,7 +6,7 @@ const FollowersModal = ({ followers, followings, setShowfollowers, showFollower 
 
     return (
         <>
-            <div className='w-[100vw] h-[calc(100vh-80px)] mt-[80px] fixed top-0 left-0 z-50 flex justify-center items-center backdrop-blur-lg'>
+            <div className='w-[100vw] h-[calc(100vh-70px)] mt-[70px] fixed top-0 left-0 z-50 flex justify-center items-center backdrop-blur-lg'>
                 <div className='md:w-[40%] sm:[60%] w-[90%] h-[90%] bg-[#ffffff] text-black rounded-xl relative shadow-[0_0px_10px_rgba(0,0,0,0.5)]'>
                     <RxCross2 className='absolute top-3 right-3 text-3xl cursor-pointer' onClick={() => { setShowfollowers({ status: false, tabName: "" }) }} />
                     <ul className='flex justify-evenly list-none mt-16'>
