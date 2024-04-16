@@ -21,7 +21,7 @@ const Warning = (props) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: message.postId })
+            body: JSON.stringify({ id: message })
         })
         const result = await response.json();
         if (result.success === true) {
