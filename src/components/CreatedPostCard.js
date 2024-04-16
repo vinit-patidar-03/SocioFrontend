@@ -45,7 +45,7 @@ const CreatedPostCard = (props) => {
           <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate(post.user !== user._id ? `/otherUserProfile/${post.user}` : '/profile') }}>{post.name}</h5>
         </div>
         <div className='m-auto bg-[#f8f8f8] rounded-lg w-[95%]'>
-          <img src={post.photo.replace('http', 'https')} className='m-auto object-container max-h-[50vh]' alt="logo" loading='lazy' />
+          <img src={post.photo.url} className='m-auto object-container max-h-[50vh]' alt="logo" loading='lazy' />
         </div>
         <div className='flex mt-5'>
           <div>

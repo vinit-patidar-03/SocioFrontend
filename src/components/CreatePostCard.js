@@ -31,10 +31,11 @@ const PostCard = () => {
             data.append("file", image);
             data.append("upload_preset", "hackerInsta");
             data.append("cloud_name", "hacker03");
+            data.append("folder", "sociogram")
 
             const photoRes = await axios.post('https://api.cloudinary.com/v1_1/hacker03/image/upload', data);
 
-            const response = await axios.post("https://sociogrambackendapi.vercel.app/sociogram/posts/createPosts", JSON.stringify({ description: text, photo: photoRes.data.url, avatar: user.avatar }), {
+            const response = await axios.post("https://sociogrambackendapi.vercel.app/sociogram/posts/createPosts", JSON.stringify({ description: text, photo: photoRes.data.secure_url, publicId: photoRes.data.public_id, signature: photoRes.data.signature, avatar: user.avatar }), {
                 headers: {
                     "Content-Type": "application/json",
                     "authToken": localStorage.getItem('token1')

@@ -17,7 +17,7 @@ const Home = () => {
                         "Content-Type": "application/json"
                     }
                 });
-            setData((prev)=>prev.concat(response.data));
+            setData((prev) => prev.concat(response.data));
         }
     }, [skip])
 
@@ -27,12 +27,11 @@ const Home = () => {
         }
     }, [Navigate])
 
-    const handleScroll = useCallback(() =>
-        {
-            if (Math.ceil(document.documentElement.clientHeight + document.documentElement.scrollTop) >= document.documentElement.scrollHeight) {
-                setSkip((prev)=>prev+10)
-             }
-        },[])
+    const handleScroll = useCallback(() => {
+        if (Math.ceil(document.documentElement.clientHeight + document.documentElement.scrollTop) >= document.documentElement.scrollHeight) {
+            setSkip((prev) => prev + 10)
+        }
+    }, [])
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
         userCheck();
