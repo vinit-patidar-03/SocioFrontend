@@ -3,6 +3,7 @@ import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
 import { useNavigate } from 'react-router-dom';
 import { IoMdSend } from "react-icons/io";
+import { FaHeart, FaRegComment, FaRegHeart } from 'react-icons/fa';
 
 const CreatedPostCard = (props) => {
 
@@ -48,21 +49,22 @@ const CreatedPostCard = (props) => {
           <img src={post.photo} className='m-auto w-full h-[300px] sm:h-[400px] object-contain' alt="logo" loading='lazy' />
         </div>
         <div className='flex mt-5'>
-          <div>
-            <i className={`fa-${like ? "solid text-pink-500" : "regular"} fa-heart ml-2 cursor-pointer fa-lg`} onClick={() => {
-              likePost(post._id)
-              if (like) {
-                setStats({ ...stats, likes: stats.likes - 1 })
-                setLike(false)
-              } else {
-                setStats({ ...stats, likes: stats.likes + 1 })
-                setLike(true)
-              }
-            }} title='like/dislike'></i>
+          <div onClick={() => {
+            likePost(post._id)
+            if (like) {
+              setStats({ ...stats, likes: stats.likes - 1 })
+              setLike(false)
+            } else {
+              setStats({ ...stats, likes: stats.likes + 1 })
+              setLike(true)
+            }
+          }}>
+            {like ? <FaHeart className='text-pink-500 text-2xl ml-2 cursor-pointer' /> : <FaRegHeart className='text-2xl ml-2 cursor-pointer' title='like/dislike' />}
             <p className='ml-2'>{stats.likes} likes</p>
           </div>
           <div className='ml-5' onClick={() => { Navigate(`/comments/${post._id}`) }}>
-            <i className="fa-regular fa-comment fa-lg ml-2 cursor-pointer" title='comment'></i>
+            {/* <i className="fa-regular fa-comment fa-lg ml-2 cursor-pointer" title='comment'></i> */}
+            <FaRegComment className='text-2xl ml-2 cursor-pointer' title='comment' />
             <p className='ml-2'>{stats.comments} comments</p>
           </div>
         </div>

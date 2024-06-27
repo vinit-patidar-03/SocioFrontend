@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const CommentCard = (props) => {
   const { comment, postId } = props;
@@ -43,10 +44,10 @@ const CommentCard = (props) => {
             <p className='ml-12 text-sm'>{comment.comment}</p>
             {
               (comment.postedby === user._id) &&
-              <i className="fa-solid fa-trash absolute right-3 top-3 cursor-pointer text-red-600" onClick={() => {
+              <FaTrashAlt className="text-xl absolute right-3 top-3 cursor-pointer text-red-600" onClick={() => {
                 deleteComment()
               }
-              }></i>
+              } />
             }
           </div>
         }
