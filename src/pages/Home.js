@@ -45,7 +45,10 @@ const Home = () => {
                 data &&
                 <div className=' mt-[80px]'>{
                     data.map((elem, index) => {
-                        return <CreatedPostCard post={elem} key={index} />
+                        return <>
+                            <CreatedPostCard post={elem} key={index} />
+                            <hr className='block sm:hidden border-black' />
+                        </>
                     })
                 }
                 </div>

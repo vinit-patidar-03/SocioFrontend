@@ -39,13 +39,13 @@ const CreatedPostCard = (props) => {
 
   return (
     <>{user &&
-      <div className='p-3 bg-white mx-auto my-3 rounded-lg  w-[500px] createdPostCard'>
+      <div className='p-3 bg-white mx-auto my-3 sm:rounded-lg sm:w-[500px] w-full sm:shadow-[0_0px_3px_0px_rgba(0,0,0,0.3)]'>
         <div className='my-2 flex items-center'>
           <img src={Avatars[post.avatar]} className='w-16 rounded-full' alt="logo" />
           <h5 className='ml-2 font-semibold cursor-pointer' onClick={() => { Navigate(post.user !== user._id ? `/otherUserProfile/${post.user}` : '/profile') }}>{post.name}</h5>
         </div>
-        <div className='m-auto bg-[#f8f8f8] rounded-lg w-[95%]'>
-          <img src={post.photo} className='m-auto object-container max-h-[50vh]' alt="logo" loading='lazy' />
+        <div className='m-auto bg-slate-100 rounded-lg w-[95%]'>
+          <img src={post.photo} className='m-auto w-full h-[300px] sm:h-[400px] object-contain' alt="logo" loading='lazy' />
         </div>
         <div className='flex mt-5'>
           <div>

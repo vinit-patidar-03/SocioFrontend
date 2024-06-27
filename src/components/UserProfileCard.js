@@ -15,7 +15,7 @@ const UserProfileCard = (props) => {
     <>
       <div className='flex flex-col items-start sm:flex-row sm:justify-between sm:items-center'>
         <div className='flex my-10 items-center'>
-          <div className='w-20 cursor-pointer' onClick={() => { Navigate(`/profileEdit?bio=${user.bio === undefined ? '' : user.bio}&website=${user.website === undefined ? '' : user.website}&avatar=${user.avatar}`) }}>
+          <div className='w-20 cursor-pointer bg-slate-100 border-2 border-orange-500 rounded-full' onClick={() => { Navigate(`/profileEdit?bio=${user.bio === undefined ? '' : user.bio}&website=${user.website === undefined ? '' : user.website}&avatar=${user.avatar}`) }}>
             {
               <img src={Avatars[post.avatar]} className='rounded full' alt="logo" />
             }

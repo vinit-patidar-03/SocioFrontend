@@ -16,20 +16,23 @@ const SignUp = () => {
 
     const Submit = async (event) => {
         event.preventDefault();
-        setStatus(true);
-        const response = await axios.post('https://sociogrambackendapi.vercel.app/sociogram/auth/signup', JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, confirm_password: credentials.confirm_password }), {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        try {
+            setStatus(true);
+            const response = await axios.post('https://sociogrambackendapi.vercel.app/sociogram/auth/signup', JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, confirm_password: credentials.confirm_password }), {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
 
-        if (response.data.success) {
-            localStorage.setItem('token1', response.data.authToken);
-            Navigate('/');
-            showAlert("success", "account created successfully");
-        }
-        else {
-            showAlert("danger", "account already exist")
+            if (response.data.success) {
+                localStorage.setItem('token1', response.data.authToken);
+                Navigate('/');
+                showAlert("success", "account created successfully");
+                setStatus(false);
+            }
+        } catch (error) {
+            showAlert("danger", error.response.data.msg);
+            setStatus(false);
         }
     }
     return (

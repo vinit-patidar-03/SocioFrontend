@@ -13,20 +13,23 @@ const SignIn = () => {
 
     const SubmitDetails = async (event) => {
         event.preventDefault();
-        setStatus(true);
-        const response = await axios.post('https://sociogrambackendapi.vercel.app/sociogram/auth/login', JSON.stringify({ email: details.email, password: details.password }), {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        try {
+            setStatus(true);
+            const response = await axios.post('https://sociogrambackendapi.vercel.app/sociogram/auth/login', JSON.stringify({ email: details.email, password: details.password }), {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
 
-        if (response.data.success) {
-            localStorage.setItem('token1', response.data.authToken);
-            Navigate('/');
-            showAlert("success", "login successfully");
-        }
-        else {
-            showAlert("danger", "some error occured while logging in")
+            if (response.data.success) {
+                localStorage.setItem('token1', response.data.authToken);
+                Navigate('/');
+                showAlert("success", "login successfully");
+                setStatus(false);
+            }
+        } catch (error) {
+            showAlert("danger", error.response.data.msg);
+            setStatus(false);
         }
     }
 

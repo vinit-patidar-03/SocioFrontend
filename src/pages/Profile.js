@@ -40,7 +40,7 @@ const Profile = () => {
                 {user &&
                     <div>
                         <UserProfileCard post={user} />
-                        <hr className='mx-10 mb-3 border-black' />
+                        <h2 className='text-2xl my-5 font-bold text-center'>Posts</h2>
                     </div>
                 }
                 <div className='flex flex-wrap justify-center'>
