@@ -5,8 +5,8 @@ import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
 
 const CommentCard = (props) => {
-  const { comment,postId } = props;
-  const { user, setImpressionStatus} = useContext(Context);
+  const { comment, postId } = props;
+  const { user, setImpressionStatus } = useContext(Context);
   const [details, setDetails] = useState('');
 
   useEffect(() => {
@@ -21,20 +21,21 @@ const CommentCard = (props) => {
 
   //FOR DELETE COMMENT
   const deleteComment = async () => {
-    setImpressionStatus({addComment: false, delComment: true})
-    await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/deleteComment',JSON.stringify({postId,commentId: comment._id}),{headers:{
-      "Content-Type":"application/json"
-    }
+    setImpressionStatus({ addComment: false, delComment: true })
+    await axios.put('https://sociogrambackendapi.vercel.app/sociogram/posts/deleteComment', JSON.stringify({ postId, commentId: comment._id }), {
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
 
-      setImpressionStatus({addComment: false, delComment: false})
+    setImpressionStatus({ addComment: false, delComment: false })
   }
   return (
     <>
-      <div className='w-[500px] m-auto commentCard'>
+      <div className='sm:w-[500px] w-full m-auto commentCard'>
         {
           details &&
-          <div className={`${comment.postedby === user._id ? 'bg-green-400' : 'bg-gray-200'} my-2 relative p-2 border-2 border-gray-500 rounded-xl`}>
+          <div className={`${comment.postedby === user._id ? 'bg-green-400' : 'bg-gray-200'} my-2 relative p-2 sm:border-2 sm:border-gray-500 sm:rounded-xl`}>
             <div className='flex items-center'>
               <img src={Avatars[details.avatar]} className='w-10' alt="logo" />
               <h3 className='font-bold ml-2'>{details.name}</h3>
@@ -42,9 +43,9 @@ const CommentCard = (props) => {
             <p className='ml-12 text-sm'>{comment.comment}</p>
             {
               (comment.postedby === user._id) &&
-                <i className="fa-solid fa-trash absolute right-3 top-3 cursor-pointer text-red-600" onClick={() => {
-                   deleteComment()
-                }
+              <i className="fa-solid fa-trash absolute right-3 top-3 cursor-pointer text-red-600" onClick={() => {
+                deleteComment()
+              }
               }></i>
             }
           </div>

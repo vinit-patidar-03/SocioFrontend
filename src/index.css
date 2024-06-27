@@ -38,19 +38,3 @@
   color: white;
   /* transition: all 0.5s ease-in; */
 }
-
-.createdPostCard {
-  box-shadow: 0px 0px 5px gray;
-}
-
-@media (max-width : 645px) {
-  .createdPostCard {
-    width: 100%;
-    box-shadow: 0px 2px 2px gray;
-    border-radius: 0px;
-  }
-
-  .createPostCard,.commentCard {
-    width: 100vw;
-  }
-}
