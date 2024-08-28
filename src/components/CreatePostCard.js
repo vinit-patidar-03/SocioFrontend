@@ -61,7 +61,7 @@ const PostCard = () => {
         <>
             <div className='h-[88vh] sm:w-[90%] w-[100%]  flex justify-center items-center m-auto'>
                 {user &&
-                    <div className=' p-2 w-[70%] m-auto bg-[#ffffff] sm:shadow-[0_0px_10px_rgba(0,0,0,0.3)] text-black sm:rounded-2xl createPostCard flex flex-col justify-evenly'>
+                    <div className=' p-2 w-[90%] sm:w-[70%] m-auto bg-[#ffffff] sm:shadow-[0_0px_10px_rgba(0,0,0,0.3)] text-black sm:rounded-2xl createPostCard flex flex-col justify-evenly'>
                         <h1 className='p-2 text-center font-bold text-2xl'> Share Your Post</h1>
                         <hr />
                         <div className='m-2 flex items-center'>

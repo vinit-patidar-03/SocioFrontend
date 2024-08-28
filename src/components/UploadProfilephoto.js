@@ -16,7 +16,7 @@ const UploadProfilephoto = () => {
     const [website, setWebsite] = useState(webUrl);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const { showAlert, setUpdate } = useContext(Context);
+    const { showAlert } = useContext(Context);
 
 
 
@@ -43,7 +43,7 @@ const UploadProfilephoto = () => {
                 setLoading(false);
                 Navigate('/profile');
                 showAlert("success", "profile updated successfully")
-                setUpdate(response.data);
+
             }
             else {
                 showAlert("danger", "some error occured");
@@ -56,9 +56,9 @@ const UploadProfilephoto = () => {
 
     return (
         <>
-            <div className='h-[100%] w-[90%]  flex justify-center items-center m-auto mt-[80px] mb-[20px]'>
+            <div className='h-[100%] w-[100%] sm:w-[90%]  flex justify-center items-center m-auto mt-[80px] mb-[20px]'>
                 {
-                    <div className=' p-2 w-[70%] m-auto text-black shadow-[0_0px_3px_0px_rgba(0,0,0,0.3)] rounded-2xl createPostCard flex flex-col justify-evenly'>
+                    <div className=' p-2 w-[95%] sm:w-[70%] text-black sm:shadow-[0_0px_3px_0px_rgba(0,0,0,0.3)] rounded-2xl createPostCard flex flex-col justify-evenly'>
                         <h1 className='p-2 text-center font-bold text-xl'>Edit Your Profile</h1>
                         <hr />
                         <div className='p-2 flex flex-col'>

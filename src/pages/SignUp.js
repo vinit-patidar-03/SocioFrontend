@@ -31,7 +31,7 @@ const SignUp = () => {
                 setStatus(false);
             }
         } catch (error) {
-            showAlert("danger", error.response.data.msg);
+            showAlert("danger", error.response.data.msg || error?.response.data?.errors[0].msg);
             setStatus(false);
         }
     }
