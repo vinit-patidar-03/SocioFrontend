@@ -12,7 +12,7 @@ const FollowersCard = ({ data, setShowfollowers }) => {
                 <img src={Avatars[data.avatar]} alt="avatar" className='w-20' />
                 <div className='cursor-pointer'>
                     <h2 className='text-black font-bold'>{data.name}</h2>
-                    <p className='text-gray-500'>{data.bio}</p>
+                    <p className='text-gray-500 line-clamp-2'>{data.bio}</p>
                 </div>
 
             </div>

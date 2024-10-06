@@ -6,12 +6,12 @@ const FollowersModal = ({ followers, followings, setShowfollowers, showFollower 
 
     return (
         <>
-            <div className='w-[100vw] h-[calc(100vh-70px)] mt-[70px] fixed top-0 left-0 z-50 flex justify-center items-center backdrop-blur-lg'>
-                <div className='md:w-[40%] sm:[60%] w-[90%] h-[90%] bg-[#ffffff] text-black rounded-xl relative shadow-[0_0px_10px_rgba(0,0,0,0.5)]'>
+            <div className='w-[100vw] h-[calc(100vh-70px)] mt-[70px] fixed top-0 left-0 z-50 flex justify-center items-center backdrop-blur-sm'>
+                <div className='lg:w-[50%] sm:[60%] w-[90%] h-[90%] bg-[#ffffff] text-black rounded-xl relative shadow-[0_0px_10px_rgba(0,0,0,0.5)]'>
                     <RxCross2 className='absolute top-3 right-3 text-3xl cursor-pointer' onClick={() => { setShowfollowers({ status: false, tabName: "" }) }} />
                     <ul className='flex justify-evenly list-none mt-16'>
-                        <li className={`${showFollower.tabName === "Followers" ? 'border-[#ff4015]' : ''} border-2 py-1 px-2 cursor-pointer`} onClick={() => { setShowfollowers({ status: true, tabName: "Followers" }) }}>Followers</li>
-                        <li className={`${showFollower.tabName === "Followings" ? 'border-[#ff4015]' : ''} border-2 py-1 px-2 cursor-pointer`} onClick={() => { setShowfollowers({ status: true, tabName: "Followings" }) }}>Followings</li>
+                        <li className={`${showFollower.tabName === "Followers" ? 'bg-[#ff4015] text-white' : 'text-black bg-gray-200'}  py-1 px-3 rounded-md cursor-pointer`} onClick={() => { setShowfollowers({ status: true, tabName: "Followers" }) }}>Followers</li>
+                        <li className={`${showFollower.tabName === "Followings" ? 'bg-[#ff4015] text-white' : 'text-black bg-gray-200'} py-1 px-3 rounded-md cursor-pointer`} onClick={() => { setShowfollowers({ status: true, tabName: "Followings" }) }}>Followings</li>
                     </ul>
                     <div className='h-[75%] overflow-scroll mx-2 my-5 flex justify-center'>
                         <div>
@@ -30,7 +30,6 @@ const FollowersModal = ({ followers, followings, setShowfollowers, showFollower 
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

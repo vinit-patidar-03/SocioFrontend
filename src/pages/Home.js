@@ -43,7 +43,7 @@ const Home = () => {
         <>
             <div>{
                 data &&
-                <div className=' mt-[80px]'>{
+                <div className=' mt-[84px]'>{
                     data.map((elem, index) => {
                         return <div key={index}>
                             <CreatedPostCard post={elem} />

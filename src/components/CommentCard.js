@@ -1,24 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Avatars } from '../utils/Avatars';
 import Context from '../context/Context';
 import { FaTrashAlt } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const CommentCard = (props) => {
   const { comment, postId } = props;
   const { user, setImpressionStatus } = useContext(Context);
-  const [details, setDetails] = useState('');
-
-  useEffect(() => {
-    fetchCommentedUser();
-  }, [])
-
-  //FOR FETCHING USER COMMENTED ON POST
-  const fetchCommentedUser = async () => {
-    const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/auth/getUser/${comment.postedby}`)
-    setDetails(response.data);
-  }
 
   //FOR DELETE COMMENT
   const deleteComment = async () => {
@@ -28,22 +18,22 @@ const CommentCard = (props) => {
         "Content-Type": "application/json"
       }
     })
-
     setImpressionStatus({ addComment: false, delComment: false })
+    toast.success("Comment Deleted Successfully");
   }
+
   return (
     <>
       <div className='sm:w-[500px] w-full m-auto commentCard'>
-        {
-          details &&
-          <div className={`${comment.postedby === user._id ? 'bg-green-400' : 'bg-gray-200'} my-2 relative p-2 sm:border-2 sm:border-gray-500 sm:rounded-xl`}>
+        {user &&
+          <div className={`${comment.postedby._id === user._id ? 'bg-green-400' : 'bg-slate-100'} my-2 relative p-2 sm:border-2 sm:border-gray-500 sm:rounded-xl`}>
             <div className='flex items-center'>
-              <img src={Avatars[details.avatar]} className='w-10' alt="logo" />
-              <h3 className='font-bold ml-2'>{details.name}</h3>
+              <img src={Avatars[comment?.postedby?.avatar]} className='w-10' alt="logo" />
+              <h3 className='font-bold ml-2'>{comment?.postedby?.name}</h3>
             </div>
             <p className='ml-12 text-sm'>{comment.comment}</p>
             {
-              (comment.postedby === user._id) &&
+              (comment.postedby._id === user._id) &&
               <FaTrashAlt className="text-xl absolute right-3 top-3 cursor-pointer text-red-600" onClick={() => {
                 deleteComment()
               }

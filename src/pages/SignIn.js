@@ -61,6 +61,14 @@ const SignIn = () => {
                             <p className='text-xs'>don't you have an account?</p>
                             <Link to='/signup' className='text-xs p-1 text-blue-700'>signup</Link>
                         </div>
+                        <h2 className='text-xs'>or</h2>
+                        <div className=' text-xs text-center'>
+                            demo credentials:
+                            <p>
+                                Email: demo@gmail.com,
+                                Password: 12345
+                            </p>
+                        </div>
                     </div>}
                 {status && <Spinner />}
             </div>

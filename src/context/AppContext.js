@@ -6,8 +6,7 @@ import axios from 'axios';
 const AppContext = (props) => {
 
     //FOR REAL TIME POST UPDATES
-    const [followUpdate, setFollowUpdate] = useState(false);
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
     const [message, setMessage] = useState('');
     const [post, setPost] = useState();
     const [impressionStatus, setImpressionStatus] = useState({ addComment: false, delComment: false });
@@ -85,13 +84,12 @@ const AppContext = (props) => {
                 "authToken": localStorage.getItem('token1')
             }
         })
-        const response = await result.json();
-        setFollowUpdate(response);
+        await result.json();
         playSound()
     }
 
     return (
-        <Context.Provider value={{ user, setUser, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, impressionStatus, setImpressionStatus, commentonPost, addFollower, followUpdate, setFollowUpdate }}>
+        <Context.Provider value={{ user, setUser, fetchUserDetails, showAlert, message, setMessage, fetchPost, post, setPost, likePost, impressionStatus, setImpressionStatus, commentonPost, addFollower }}>
             {props.children}
         </Context.Provider>
     )
