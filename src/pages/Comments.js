@@ -27,7 +27,7 @@ const Comments = () => {
                 {post &&
                     <div className='lg:flex mt-20 mb-5 p-3 lg:shadow-[0_0px_5px_1px_rgba(0,0,0,0.2)] lg:rounded-md'>
                         <CreatedPostCard post={post} />
-                        <div className='ml-3 mt-2 lg:overflow-scroll'>
+                        <div className='lg:ml-3 lg:mt-2 lg:overflow-scroll'>
                             <h3 className='font-bold text-lg text-center'>Comments</h3>
                             {post.comments.length !== 0 ?
                                 Array.from(post.comments).reverse().map((elem, index) => {
