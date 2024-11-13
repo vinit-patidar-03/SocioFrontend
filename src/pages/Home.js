@@ -31,7 +31,7 @@ const Home = () => {
     }, [Navigate])
 
     const handleScroll = useCallback(() => {
-        if (Math.ceil(document.documentElement.clientHeight + document.documentElement.scrollTop) >= document.documentElement.scrollHeight) {
+        if (Math.floor(document.documentElement.clientHeight + document.documentElement.scrollTop) >= document.documentElement.scrollHeight) {
             setSkip((prev) => prev + 10)
         }
     }, [])
