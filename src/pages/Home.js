@@ -8,9 +8,11 @@ const Home = () => {
     const Navigate = useNavigate('');
     const [data, setData] = useState([]);
     const [skip, setSkip] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const fetchPosts = useCallback(async () => {
         if (localStorage.getItem('token1')) {
+            setLoading(true);
             const response = await axios.get(`https://sociogrambackendapi.vercel.app/sociogram/posts/posts?skip=${skip}&limit=10`,
                 {
                     headers: {
@@ -18,6 +20,7 @@ const Home = () => {
                     }
                 });
             setData((prev) => prev.concat(response.data));
+            setLoading(false);
         }
     }, [skip])
 
@@ -53,7 +56,7 @@ const Home = () => {
                 }
                 </div>
             }
-                {!data && <Spinner />}
+                {loading && <Spinner />}
             </div>
         </>
     )
